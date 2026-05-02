@@ -1,1 +1,1 @@
-const btnMenu=document.querySelector(".sidebar__menu"),sidebarNavbar=document.querySelector(".sidebar__navbar");btnMenu.addEventListener("click",function(){sidebarNavbar.classList.toggle("activo")});
+const btnMenu=document.querySelector(".sidebar__menu"),sidebarNavbar=document.querySelector(".sidebar__navbar"),alertasContenedor=document.querySelector(".alertas-contenedor");btnMenu.addEventListener("click",function(){sidebarNavbar.classList.toggle("activo")}),alertasContenedor&&setTimeout(()=>{alertasContenedor.style.display="none"},3e3);

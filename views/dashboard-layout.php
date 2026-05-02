@@ -1,6 +1,7 @@
 <?php 
   /** @var string $titulo */ 
   /** @var string $contenido */ 
+  /** @var string $script */ 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,7 +23,7 @@
     </main>
   </div>
 
-  <script src="/build/js/app.js"></script>
+  <?php echo $script ?? ''; ?>
   
 </body>
 </html>

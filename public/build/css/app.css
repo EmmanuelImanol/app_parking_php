@@ -441,15 +441,25 @@ body > section {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  z-index: 100;
-  width: 40rem;
+  z-index: 1000;
+  width: 90%;
+}
+@media (min-width: 768px) {
+  .alertas-contenedor {
+    width: 40rem;
+  }
 }
 .alertas-contenedor .alerta {
   padding: 1rem;
   text-transform: uppercase;
   font-weight: 900;
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+@media (min-width: 768px) {
+  .alertas-contenedor .alerta {
+    font-size: 1.2rem;
+  }
 }
 .alertas-contenedor .alerta.error {
   background-color: rgb(251.2, 209.4, 209.4);

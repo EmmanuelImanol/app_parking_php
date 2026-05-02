@@ -37,6 +37,9 @@
     <a href="/dashboard" class="sidebar__enlace">Dasboard</a>
     <a href="/dashboard/usuarios" class="sidebar__enlace">Usuarios</a>
     <a href="/dashboard/cobroporhora" class="sidebar__enlace">Cobro por hora</a>
+    <a href="/logout" class="sidebar__enlace">Cerrar Sesión</a>
   </nav>
   <i class="fa-solid fa-bars sidebar__menu"></i>
 </div>
+
+<?php $script = "<script src='/build/js/app.js'></script>"; ?>

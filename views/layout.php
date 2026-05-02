@@ -14,6 +14,8 @@
     /** @var string $contenido */ 
     echo $contenido; 
   ?>
+
+  <?php echo $script = ''; ?>
   
 </body>
 </html>

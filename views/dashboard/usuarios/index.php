@@ -39,3 +39,5 @@
     <input type="submit" value="Crear Usuario">
   </form>
 </div>
+
+<?php $script = "<script src='/build/js/app.js'></script>"; ?>
