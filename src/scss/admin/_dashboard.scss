@@ -1,0 +1,121 @@
+@use 'sass:color';
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+
+    @include m.tablet {
+      flex-direction: row;
+    }
+  }
+  &__logo {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: v.$blanco;
+    margin-bottom: 2rem;
+  }
+  &__sidebar {
+    background-color: color.scale(#0e1a61, $lightness: 10%);
+    padding: 2rem;
+  }
+  &__navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  &__enlace {
+    color: v.$blanco;
+    padding: 1rem;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.6rem;
+    &:hover,
+    &--actual {
+      background-color: v.$blanco;
+      color: #0e1a61;
+    }
+  }
+  &__icono {
+    font-size: 2rem;
+  }
+
+  &__contenido {
+    flex: 1;
+  }
+  @include m.tablet {
+    &__contenido {
+      height: 100vh;
+      overflow: auto;
+    }
+  }
+}
+
+.dashboard__sidebar {
+  display: none;
+  @include m.tablet {
+    display: block;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 1rem;
+  background-color: #0e1a61;
+  margin: 1rem 1rem 2rem 1rem;
+  border-radius: 3rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 7px 13px 12px -5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  @include m.tablet {
+    display: none;
+  }
+  a {
+    color: v.$blanco;
+  }
+  &__menu {
+    color: v.$blanco;
+    cursor: pointer;
+  }
+  &__navbar {
+    position: absolute;
+    top: 7rem;
+    left: 1rem;
+    right: 1rem;
+    background-color: #0e1a61;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem;
+    transform: translateX(-100rem);
+    transition: all 0.3s ease;
+  }
+  &__enlace {
+    padding: 1rem 0;
+    border-radius: 1rem;
+    &:hover {
+      background-color: v.$blanco;
+      color: #0e1a61;
+    }
+  }
+}
+.activo {
+  transform: translateX(0);
+}

@@ -1,0 +1,27 @@
+@use 'sass:color';
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.alertas-contenedor {
+  position: fixed; // fixed es mejor que absolute para notificaciones
+  right: 1rem;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  z-index: 100;
+  width: 40rem;
+
+  .alerta {
+    padding: 1rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+    &.error {
+      background-color: color.scale(v.$rojo, $lightness: 80%);
+      border-left: .5rem solid v.$rojo;
+    }
+  }
+}

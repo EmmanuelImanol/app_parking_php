@@ -1,0 +1,25 @@
+{
+  "name": "app_parking_php",
+  "version": "1.0.0",
+  "description": "Sistema web para estacionamiento con SASS, Gulp y PHP, MVC",
+  "keywords": [
+    "SASS",
+    "Gulp",
+    "MVC",
+    "PHP"
+  ],
+  "license": "ISC",
+  "author": "Emmanuel Imanol Vaca Hernandez",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch src/scss:build/css",
+    "dev": "gulp"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-sass": "^6.0.1",
+    "gulp-terser": "^2.1.0",
+    "sass": "^1.99.0"
+  }
+}

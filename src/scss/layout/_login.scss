@@ -1,0 +1,28 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.formulario-login {
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  height: 100vh;
+  
+  @include m.tablet {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    input {
+      padding: 1rem 2rem;
+      border: 1px solid #eee;
+    }
+  }
+}

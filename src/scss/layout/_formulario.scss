@@ -1,0 +1,24 @@
+@use 'base/mixins' as m;
+
+.formulario {
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 5rem;
+  box-shadow: 7px 13px 12px -5px rgba(0,0,0,0.1);
+  @include m.desktop {
+    width: 50%;
+  }
+  
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    input {
+      padding: 1rem;
+    }
+  }
+}
