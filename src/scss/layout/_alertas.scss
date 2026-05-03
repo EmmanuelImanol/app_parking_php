@@ -29,5 +29,10 @@
       background-color: color.scale(v.$rojo, $lightness: 80%);
       border-left: .5rem solid v.$rojo;
     }
+
+    &.exito {
+      background-color: color.scale(v.$verde, $lightness: 80%);
+      border-left: .5rem solid v.$verde;
+    }
   }
 }

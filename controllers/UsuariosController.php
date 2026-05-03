@@ -9,8 +9,13 @@ class UsuariosController {
   public static function index(Router $router) {
     session_start();
     isAuth();
+    $alertas = Usuario::getAlertas();
+    $usuarios = Usuario::all();
     $router->render('dashboard/usuarios/index', [
-      'titulo' => 'Usuarios'
+      'titulo' => 'Usuarios',
+      'alertas' => $alertas,
+      'usuario' => new Usuario,
+      'usuarios' => $usuarios
     ]);
   }
 
@@ -18,6 +23,7 @@ class UsuariosController {
     $alertas = [];
     // Instanciar usuario
     $usuario = new Usuario;
+    $usuarios = Usuario::all();
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
       $usuario->sincronizar($_POST);
       $alertas = $usuario->validarNuevoUsuario();
@@ -34,9 +40,12 @@ class UsuariosController {
           unset($usuario->password_confirm);
           // Crear un nuevo usuario
           $resultado = $usuario->guardar();
-          if($resultado) {
-            header('Location: ' . base_url('/dashboard'));
+
+          if($resultado['resultado']) {
             Usuario::setAlerta('exito', 'Usuario creado correctamente');
+            $usuario = new Usuario;  // ← campos quedan vacíos en el form
+          } else {
+            Usuario::setAlerta('error', 'Hubo un error');
           }
         }
 
@@ -46,8 +55,10 @@ class UsuariosController {
     $alertas = Usuario::getAlertas();
 
     $router->render('dashboard/usuarios/index', [
+      'titulo' => 'Usuarios',
+      'alertas' => $alertas,
       'usuario' => $usuario,
-      'alertas' => $alertas
+      'usuarios' => $usuarios
     ]);
   }
 }

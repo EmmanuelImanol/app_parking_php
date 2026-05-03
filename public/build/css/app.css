@@ -365,6 +365,7 @@ p {
   font-size: 2rem;
   color: #000000;
   line-height: 1.5;
+  margin: 0;
 }
 
 .contenedor {
@@ -465,6 +466,10 @@ body > section {
   background-color: rgb(251.2, 209.4, 209.4);
   border-left: 0.5rem solid #ec1b1b;
 }
+.alertas-contenedor .alerta.exito {
+  background-color: rgb(219.2, 240.8, 239.8);
+  border-left: 0.5rem solid #4CB8B3;
+}
 
 .formulario {
   padding: 2rem;
@@ -475,11 +480,6 @@ body > section {
   margin-bottom: 5rem;
   box-shadow: 7px 13px 12px -5px rgba(0, 0, 0, 0.1);
 }
-@media (min-width: 1200px) {
-  .formulario {
-    width: 50%;
-  }
-}
 .formulario .campo {
   display: flex;
   flex-direction: column;
@@ -487,6 +487,20 @@ body > section {
 }
 .formulario .campo input {
   padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .usuarios {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.usuarios__card {
+  background-color: #a5a5a5;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 .dashboard {
