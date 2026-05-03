@@ -40,4 +40,7 @@
   </form>
 </div>
 
-<?php $script = "<script src='/build/js/app.js'></script>"; ?>
+<?php 
+  $base_url = base_url('/build/js/app.js');
+  $script = "<script src='{$base_url}'></script>"; 
+?>

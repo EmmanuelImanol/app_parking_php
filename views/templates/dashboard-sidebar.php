@@ -42,4 +42,4 @@
   <i class="fa-solid fa-bars sidebar__menu"></i>
 </div>
 
-<?php $script = "<script src='/build/js/app.js'></script>"; ?>
+<?php $script = "<script src='base_url('/build/js/app.js')'></script>"; ?>
