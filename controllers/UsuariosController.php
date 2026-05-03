@@ -35,8 +35,8 @@ class UsuariosController {
           // Crear un nuevo usuario
           $resultado = $usuario->guardar();
           if($resultado) {
+            header('Location: ' . base_url('/dashboard'));
             Usuario::setAlerta('exito', 'Usuario creado correctamente');
-            header('Location: /dashboard/usuarios');
           }
         }
 
