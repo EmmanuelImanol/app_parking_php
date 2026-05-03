@@ -1,6 +1,6 @@
 <div class="contenedor">
   <?php include_once __DIR__ . '/../templates/alertas.php'; ?>
-  <form action="/" class="formulario-login" method="POST" novalidate>
+  <form action="<?= base_url('/') ?>" class="formulario-login" method="POST" novalidate>
     <div class="campo">
       <label for="email">Email: </label>
       <input 
@@ -21,3 +21,5 @@
     <input type="submit" value="Iniciar Sesión">
   </form>
 </div>
+
+<?php $script = "<script src='/build/js/app.js'></script>"; ?>

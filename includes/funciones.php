@@ -13,6 +13,11 @@ function isAuth() : void {
   }
 }
 
+function base_url(string $path = ''): string {
+  return ($_ENV['APP_URL'] ?? '') . $path;
+}
+
 function pagina_actual(string $url): bool {
-  return $_SERVER['PATH_INFO'] === $url;
+  $currentUrl = str_replace($_ENV['APP_URL'] ?? '', '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+  return $currentUrl === $url;
 }

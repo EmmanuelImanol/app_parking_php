@@ -7,7 +7,7 @@
   <h1><?= $titulo ?></h1>
 
   <?php include_once __DIR__ . '/../../templates/alertas.php'; ?>
-  <form class="formulario" action="/dashboard/usuarios" method="POST" novalidate>
+  <form class="formulario" action="<?= base_url('/dashboard/usuarios') ?>" method="POST" novalidate>
     <div class="campo">
       <label for="nombre">Nombre:</label>
       <input 
