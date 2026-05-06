@@ -235,7 +235,6 @@
       });
 
       const resultado = await respuesta.json();
-      console.log(resultado);
       if(resultado.resultado) {
         mostrarAlertas({ exito: ['Usuario Actualizado Correctamente'] });
         cerrarModal();
