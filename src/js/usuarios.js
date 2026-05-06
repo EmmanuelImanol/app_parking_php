@@ -49,7 +49,7 @@
 
   async function consultarAPI() {
     try {
-      const url = '/api/usuarios';
+      const url = `${BASE_URL}/api/usuarios`;
       const resultado = await fetch(url);
       const usuarios = await resultado.json();
       mostrarUsuarios(usuarios);
@@ -177,7 +177,7 @@
     datos.append('password_confirm', password_confirm);
 
     try {
-      const url = '/api/usuario';
+      const url = `${BASE_URL}/api/usuario`;
       const respuesta = await fetch(url, {
         method: 'POST',
         body: datos
@@ -199,12 +199,11 @@
   }
 
   async function eliminarUsuario(id, elemento) {
-    
     const datos = new FormData();
     datos.append('id', id);
 
     try {
-      const url = '/api/usuario/eliminar';
+      const url = `${BASE_URL}/api/usuario/eliminar`;
       const respuesta = await fetch(url, {
         method: 'POST',
         body: datos

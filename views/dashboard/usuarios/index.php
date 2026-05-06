@@ -94,6 +94,7 @@
   $base_url_app = base_url('/build/js/app.js');
   $base_url_usuarios = base_url('/build/js/usuarios.js');
   $script .= "
+    <script> const BASE_URL = '" . base_url() . "'; </script>
     <script src='{$base_url_app}'></script>
     <script src='{$base_url_usuarios}'></script>
   "; 
