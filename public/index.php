@@ -18,7 +18,9 @@ $router->get('/dashboard', [DashboardController::class, 'index']);
 
 $router->get('/dashboard/usuarios', [UsuariosController::class, 'index']);
 // API para usuarios
-$router->get('/api/usuarios', [UsuariosController::class, 'obtenerUsuarios']);
+$router->get('/api/usuarios', function($router) {
+  UsuariosController::obtenerUsuarios();
+});
 $router->post('/api/usuario', [UsuariosController::class, 'crear']);
 $router->post('/api/usuario/actualizar', [UsuariosController::class, 'actualizar']);
 $router->post('/api/usuario/eliminar', [UsuariosController::class, 'eliminar']);
