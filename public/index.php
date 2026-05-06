@@ -10,40 +10,20 @@ use MVC\Router;
 
 $router = new Router();
 
-$router->get('/', function($router) {
-  LoginController::login($router);
-});
-$router->post('/', function($router) {
-  LoginController::login($router);
-});
-$router->get('/logout', function($router) {
-  LoginController::logout();
-});
+$router->get('/', [LoginController::class, 'login']);
+$router->post('/', [LoginController::class, 'login']);
+$router->get('/logout', [LoginController::class, 'logout']);
 
-$router->get('/dashboard', function($router) {
-  DashboardController::index($router);
-});
+$router->get('/dashboard', [DashboardController::class, 'index']);
 
-$router->get('/dashboard/usuarios', function($router) {
-  UsuariosController::index($router);
-});
+$router->get('/dashboard/usuarios', [UsuariosController::class, 'index']);
 // API para usuarios
-$router->get('/api/usuarios', function($router) {
-  UsuariosController::obtenerUsuarios();
-});
-$router->post('/api/usuario', function($router) {
-  UsuariosController::crear();
-});
-$router->post('/api/usuario/actualizar', function($router) {
-  UsuariosController::actualizar();
-});
-$router->post('/api/usuario/eliminar', function($router) {
-  UsuariosController::eliminar();
-});
+$router->get('/api/usuarios', [UsuariosController::class, 'obtenerUsuarios']);
+$router->post('/api/usuario', [UsuariosController::class, 'crear']);
+$router->post('/api/usuario/actualizar', [UsuariosController::class, 'actualizar']);
+$router->post('/api/usuario/eliminar', [UsuariosController::class, 'eliminar']);
 
 
-$router->get('/dashboard/cobroporhora', function($router) {
-  CobroPorHoraController::index($router);
-});
+$router->get('/dashboard/cobroporhora', [CobroPorHoraController::class, 'index']);
 
 $router->comprobarRutas();

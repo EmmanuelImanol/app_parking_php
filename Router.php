@@ -7,11 +7,11 @@ class Router {
   public array $rutasGET = [];
   public array $rutasPOST = [];
 
-  public function get(string $url, callable $fn): void {
+  public function get(string $url, callable|array $fn): void {
     $this->rutasGET[$url] = $fn;
   }
 
-  public function post(string $url, callable $fn): void {
+  public function post(string $url, callable|array $fn): void {
     $this->rutasPOST[$url] = $fn;
   }
 
