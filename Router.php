@@ -16,7 +16,15 @@ class Router {
   }
 
   public function comprobarRutas(): void {
-    $currentUrl = str_replace($_ENV['APP_URL'] ?? '', '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $appUrl = $_ENV['APP_URL'] ?? '';
+
+    // ✅ Extraer solo el path de APP_URL para comparar correctamente
+    $basePath = parse_url($appUrl, PHP_URL_PATH) ?? '';
+    $currentUrl = str_replace(
+      $basePath, 
+      '', 
+      parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+    );
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method === 'GET') {
