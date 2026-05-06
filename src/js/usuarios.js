@@ -49,7 +49,7 @@
 
   async function consultarAPI() {
     try {
-      const url = `${BASE_URL}/api/usuarios`;
+      const url = `${API_URL}/usuarios`;
       const resultado = await fetch(url);
       const usuarios = await resultado.json();
       mostrarUsuarios(usuarios);
@@ -177,7 +177,7 @@
     datos.append('password_confirm', password_confirm);
 
     try {
-      const url = `${BASE_URL}/api/usuario`;
+      const url = `${API_URL}/usuario`;
       const respuesta = await fetch(url, {
         method: 'POST',
         body: datos
@@ -203,7 +203,7 @@
     datos.append('id', id);
 
     try {
-      const url = `${BASE_URL}/api/usuario/eliminar`;
+      const url = `${API_URL}/usuario/eliminar`;
       const respuesta = await fetch(url, {
         method: 'POST',
         body: datos

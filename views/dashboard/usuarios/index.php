@@ -15,7 +15,8 @@
     Crear usuario
   </button>
   <?php include_once __DIR__ . '/../../templates/alertas.php'; ?>
-  <div class="contenedor-usuarios" id="usuarios"></div>
+  <div class="contenedor-usuarios" id="usuarios">
+  </div>
 </div>
 
 <!-- Modal -->
@@ -94,7 +95,9 @@
   $base_url_app = base_url('/build/js/app.js');
   $base_url_usuarios = base_url('/build/js/usuarios.js');
   $script .= "
-    <script> const BASE_URL = '" . base_url() . "'; </script>
+    <script> 
+      const API_URL = '" . $_ENV['API_URL'] . "';
+    </script>
     <script src='{$base_url_app}'></script>
     <script src='{$base_url_usuarios}'></script>
   "; 
