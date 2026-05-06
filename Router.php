@@ -53,7 +53,15 @@ class Router {
     include_once __DIR__ . "/views/$view.php";
     $contenido = ob_get_clean(); // Limpia el Buffer
     // Utilizar el layout de acuerdo a la URL
-    $currentUrl = str_replace($_ENV['APP_URL'] ?? '', '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $appUrl = $_ENV['APP_URL'] ?? '';
+
+    // ✅ Extraer solo el path de APP_URL para comparar correctamente
+    $basePath = parse_url($appUrl, PHP_URL_PATH) ?? '';
+    $currentUrl = str_replace(
+      $basePath, 
+      '', 
+      parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+    );
     
     if(str_contains($currentUrl, '/dashboard')) {
       include_once __DIR__ . '/views/dashboard-layout.php';
