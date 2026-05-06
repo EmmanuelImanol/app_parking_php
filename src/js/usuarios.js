@@ -138,6 +138,9 @@
       document.querySelector('.modal-id').value = usuario.id;
       document.querySelector('#nombre').value = usuario.nombre;
       document.querySelector('#email').value = usuario.email;
+
+      modal.dataset.nombreOriginal = usuario.nombre;
+      modal.dataset.emailOriginal = usuario.email;
     }
 
     modal.classList.add('activo');
@@ -150,7 +153,6 @@
   }
 
   // Submit del form - decide si crear o editar según el modo
-
   document.querySelector('.form-usuario').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -161,11 +163,29 @@
       password_confirm: document.querySelector('#password_confirm').value.trim(),
     }
 
+    if(modoModal === 'editar') {
+      const sinCambios = 
+        usuario.nombre === modal.dataset.nombreOriginal &&
+        usuario.email  === modal.dataset.emailOriginal;
+
+      if(sinCambios) {
+        mostrarAlertas({ error: ['No has realizado ningún cambio'] });
+        return;
+      }
+    }
+
+    modalBtn.disabled = true;
+    modalBtn.value = 'Procesando...';
+
     if(modoModal === 'crear') {
       await crearUsuario(usuario);
     } else {
       await actualizarUsuario(usuario);
     }
+
+    modalBtn.disabled = false;
+    modalBtn.value = modoModal === 'crear' ? 'Crear Usuario' : 'Guardar Cambios';
+
   })
 
   async function crearUsuario(usuario) {
@@ -192,6 +212,41 @@
         consultarAPI();
       } else {
         mostrarAlertas(resultado.alertas);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function actualizarUsuario(usuario) {
+    const { nombre, email } = usuario;
+    const id = document.querySelector('.modal-id').value;
+
+    const datos = new FormData();
+    datos.append('id', id);
+    datos.append('nombre', nombre);
+    datos.append('email', email);
+
+    try {
+      const url = `${API_URL}/usuario/actualizar`;
+      const respuesta = await fetch(url, {
+        method: 'POST',
+        body: datos
+      });
+
+      const resultado = await respuesta.json();
+      console.log(resultado);
+      if(resultado.resultado) {
+        mostrarAlertas({ exito: ['Usuario Actualizado Correctamente'] });
+        cerrarModal();
+        contenedorUsuarios.innerHTML = '';
+        consultarAPI();
+      } else {
+        if(resultado.alertas) {
+          mostrarAlertas(resultado.alertas);
+        } else {
+          mostrarAlertas({ error: [resultado.mensaje ?? 'Hubo un error'] });
+        }
       }
     } catch (error) {
       console.log(error);

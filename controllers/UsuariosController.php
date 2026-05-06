@@ -51,7 +51,40 @@ class UsuariosController {
 
   public static function actualizar() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $id = $_POST['id'] ?? null;
 
+      if(!$id) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'ID no proporcionado']);
+        return;
+      }
+
+      $usuario = Usuario::find($id);
+
+      if(!$usuario) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'Usuario no encontrado']);
+        return;
+      }
+
+      // Sincronizar datos
+      $usuario->nombre = $_POST['nombre'] ?? $usuario->nombre;
+      $usuario->email = $_POST['email'] ?? $usuario->email;
+
+      // Validar
+      $alertas = $usuario->validarUsuario();
+      if(!empty($alertas)) {
+        echo json_encode(['resultado' => false, 'alertas' => $alertas]);
+        return;
+      }
+
+      // Verificar Email Duplicado
+      $existeUsuario = Usuario::where('email', $usuario->email);
+      if($existeUsuario && $existeUsuario->id !== $usuario->id) {
+        echo json_encode(['resultado' => false, 'alertas' => ['error' => ['El email ya está en uso']]]);
+        return;
+      }
+
+      $resultado = $usuario->actualizar();
+      echo json_encode(['resultado' => $resultado]);
     }
   }
 
