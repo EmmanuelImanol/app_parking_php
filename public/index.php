@@ -15,8 +15,15 @@ $router->post('/', [LoginController::class, 'login']);
 $router->get('/logout', [LoginController::class, 'logout']);
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
+
 $router->get('/dashboard/usuarios', [UsuariosController::class, 'index']);
-$router->post('/dashboard/usuarios', [UsuariosController::class, 'crear']);
+// API para usuarios
+$router->get('/api/usuarios', [UsuariosController::class, 'obtenerUsuarios']);
+$router->post('/api/usuario', [UsuariosController::class, 'crear']);
+$router->post('/api/usuario/actualizar', [UsuariosController::class, 'actualizar']);
+$router->post('/api/usuario/eliminar', [UsuariosController::class, 'eliminar']);
+
+
 $router->get('/dashboard/cobroporhora', [CobroPorHoraController::class, 'index']);
 
 $router->comprobarRutas();

@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 html {
   font-size: 62.5%;
@@ -71,4 +72,10 @@ img {
 
 body > section {
   padding: 10rem 0
+}
+.titulo-pagina {
+  text-align: center;
+  @include m.tablet {
+    text-align: left;
+  }
 }

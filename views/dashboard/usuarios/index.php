@@ -2,61 +2,99 @@
   /** @var string $titulo */ 
   /** @var object $usuario */ 
   /** @var array $usuarios */ 
+  /** @var string $script */ 
 ?>
 
 <div class="contenedor">
-  <h1><?= $titulo ?></h1>
-
+  <h1 class="titulo-pagina"><?= $titulo ?></h1>
+  <button 
+    type="button"
+    class="btn-crear"
+  >
+    <i class="fa-solid fa-user-plus"></i>
+    Crear usuario
+  </button>
   <?php include_once __DIR__ . '/../../templates/alertas.php'; ?>
-  <div class="usuarios">
-    <form class="formulario" action="<?= base_url('/dashboard/usuarios') ?>" method="POST" novalidate>
+  <div class="contenedor-usuarios" id="usuarios"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal">
+  <div class="modal-contenido">
+    <button 
+      type="button"
+      class="cerrar-modal"
+    >
+      <i class="fa-regular fa-circle-xmark"></i>
+    </button>
+
+    <h2 class="modal-titulo">Crear Usuario</h2>
+
+    <form class="form-usuario" novalidate>
+      <input type="hidden" class="modal-id">
       <div class="campo">
         <label for="nombre">Nombre:</label>
         <input 
           type="text" 
-          id="nombre" 
           name="nombre" 
+          id="nombre"
           placeholder="Nombre del usuario"
-          value="<?php echo $usuario->nombre; ?>"
         >
       </div>
       <div class="campo">
         <label for="email">Email:</label>
         <input 
           type="email" 
-          id="email" 
           name="email" 
-          placeholder="Email"
-          value="<?php echo $usuario->email; ?>"
+          id="email"
+          placeholder="ej. correo@parking.com"
         >
       </div>
-      <div class="campo">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password">
+
+      <!-- Solo visible al crear -->
+      <div class="campo campo-password">
+        <label for="password">Contraseña:</label>
+        <input 
+          type="password" 
+          name="password" 
+          id="password"
+        >
       </div>
-      <div class="campo">
-        <label for="password_confirm">Repetir Contraseña</label>
-        <input type="password" name="password_confirm" id="password_confirm">
+
+      <div class="campo campo-password">
+        <label for="password_confirm">Repetir contraseña:</label>
+        <input 
+          type="password" 
+          name="password_confirm" 
+          id="password_confirm"
+        >
       </div>
-      <input type="submit" value="Crear Usuario">
+
+      <input 
+        type="submit" 
+        value="Crear Usuario"
+        class="modal-btn"
+      >
     </form>
-    <div class="usuarios__contenedor">
-      <?php if(count($usuarios) === 0): ?>
-        <p>No hay usuarios aún</p>
-      <?php else: ?>
-        <?php foreach($usuarios as $usuario): ?>
-          <div class="usuarios__card">
-            <p><?= $usuario->nombre ?></p>
-            <p><?= $usuario->email ?></p>
-            <p><?= $usuario->rol ?></p>
-          </div>
-        <?php endforeach; ?>
-      <?php endif; ?>
+  </div>
+</div>
+
+<div id="modal-confirmar" class="modal-confirmar">
+  <div class="modal-confirmar__contenido">
+    <h3>¿Eliminar usuario?</h3>
+    <p>Esta acción no se puede deshacer.</p>
+    <div class="modal-confirmar__botones">
+      <button class="btn-cancelar">Cancelar</button>
+      <button class="btn-confirmar">Sí, eliminar</button>
     </div>
   </div>
 </div>
 
 <?php 
-  $base_url = base_url('/build/js/app.js');
-  $script = "<script src='{$base_url}'></script>"; 
+  $base_url_app = base_url('/build/js/app.js');
+  $base_url_usuarios = base_url('/build/js/usuarios.js');
+  $script .= "
+    <script src='{$base_url_app}'></script>
+    <script src='{$base_url_usuarios}'></script>
+  "; 
 ?>

@@ -23,7 +23,7 @@
   }
   &__sidebar {
     background-color: color.scale(#0e1a61, $lightness: 10%);
-    padding: 2rem;
+    padding: 2rem 4rem 2rem 2rem;
   }
   &__navbar {
     display: flex;
@@ -38,10 +38,12 @@
     align-items: center;
     gap: 1rem;
     font-size: 1.6rem;
+    transition: all .3s ease;
     &:hover,
     &--actual {
       background-color: v.$blanco;
       color: #0e1a61;
+      transform: translateX(1rem);
     }
   }
   &__icono {

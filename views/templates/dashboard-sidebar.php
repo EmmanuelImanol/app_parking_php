@@ -44,5 +44,5 @@
 
 <?php 
   $base_url = base_url('/build/js/app.js');
-  $script = "<script src='{$base_url}'></script>"; 
+  $script = $script ?? "<script src='{$base_url}'></script>"; 
 ?>

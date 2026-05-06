@@ -9,56 +9,70 @@ class UsuariosController {
   public static function index(Router $router) {
     session_start();
     isAuth();
-    $alertas = Usuario::getAlertas();
-    $usuarios = Usuario::all();
     $router->render('dashboard/usuarios/index', [
-      'titulo' => 'Usuarios',
-      'alertas' => $alertas,
-      'usuario' => new Usuario,
-      'usuarios' => $usuarios
+      'titulo' => 'Usuarios'
     ]);
   }
 
-  public static function crear(Router $router) {
-    $alertas = [];
-    // Instanciar usuario
-    $usuario = new Usuario;
+  public static function obtenerUsuarios() {
     $usuarios = Usuario::all();
+
+    $usuarios = array_map(function($usuario) {
+      unset($usuario->password, $usuario->password_confirm);
+      return $usuario;
+    }, $usuarios);
+
+    echo json_encode($usuarios);
+  }
+
+  public static function crear() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $usuario->sincronizar($_POST);
+      $usuario = new Usuario($_POST);
       $alertas = $usuario->validarNuevoUsuario();
 
-      // Verificar que no exista el usuario
-      if(empty($alertas)) {
-        $existeUsuario = Usuario::where('email', $usuario->email);
-        if($existeUsuario) {
-          Usuario::setAlerta('error', 'El usuario ya esta registrado');
-        } else {
-          // Hashear el password
-          $usuario->hashPassword();
-          // Eliminar passwrod_confirm
-          unset($usuario->password_confirm);
-          // Crear un nuevo usuario
-          $resultado = $usuario->guardar();
-
-          if($resultado['resultado']) {
-            Usuario::setAlerta('exito', 'Usuario creado correctamente');
-            $usuario = new Usuario;  // ← campos quedan vacíos en el form
-          } else {
-            Usuario::setAlerta('error', 'Hubo un error');
-          }
-        }
-
+      if(!empty($alertas)) {
+        echo json_encode(['resultado' => false, 'alertas' => $alertas]);
+        return;
       }
+
+      $existeUsuario = Usuario::where('email', $usuario->email);
+      if($existeUsuario) {
+        echo json_encode(['resultado' => false, 'alertas' => ['error' => ['El email ya está registrado']]]);
+        return;
+      }
+
+      $usuario->hashPassword();
+      unset($usuario->password_confirm);
+      $resultado = $usuario->guardar();
+
+      echo json_encode($resultado);
     }
+  }
 
-    $alertas = Usuario::getAlertas();
+  public static function actualizar() {
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $router->render('dashboard/usuarios/index', [
-      'titulo' => 'Usuarios',
-      'alertas' => $alertas,
-      'usuario' => $usuario,
-      'usuarios' => $usuarios
-    ]);
+    }
+  }
+
+  public static function eliminar() {
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $id = $_POST['id'] ?? null;
+
+      if(!$id) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'ID no proporcionado']);
+        return;
+      }
+
+      $usuario = Usuario::find($id);
+
+      if(!$usuario) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'Usuario no encontrado']);
+        return;
+      }
+
+      $resultado = $usuario->eliminar();
+      echo json_encode(['resultado' => $resultado]);
+    }
   }
 }

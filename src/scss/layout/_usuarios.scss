@@ -1,14 +1,76 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
-.usuarios {
-  @include m.desktop {
+
+.btn-crear {
+  background-color: v.$indigo;
+  border: none;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  transition: all .3s ease;
+  @include m.telefono {
+    width: auto;
+  }
+
+  &:hover {
+    background-color: v.$indigo_oscuro;
+    cursor: pointer;
+    transform: translatey(-.5rem)
+  }
+}
+
+.contenedor-usuarios {
+  margin-bottom: 2rem;
+  @include m.grid(1, 2rem);
+  @include m.tablet {
     @include m.grid(2, 2rem);
   }
-  &__card {
-    background-color: #a5a5a5;
+  @include m.desktop {
+    @include m.grid(3, 2rem);
+  }
+  &__contenedor {
+    @include m.grid(1, 2rem);
+    @include m.tablet {
+      padding: 2rem;
+      height: 51rem;
+      border-radius: 1rem;
+      overflow-y: auto;
+      @include m.grid(2, 2rem);
+    }
+    @include m.desktop {
+      @include m.grid(1, 2rem);
+    }
+  }
+
+  .usuario {
+    background-color: v.$verde;
     border-radius: 1rem;
     padding: 1rem;
-    margin-bottom: 2rem;
+    transition: all .3s ease;
+    p {
+      color: v.$blanco;
+    }
+    &:hover {
+      transform: translateY(-1rem);
+      cursor: pointer;
+      box-shadow: 7px 13px 12px -5px rgba(0,0,0,0.1);
+    }
+
+    .btn-eliminar {
+      background: v.$rojo;
+      border: none;
+      color: v.$blanco;
+      cursor: pointer;
+      margin-top: 1rem;
+      padding: .75rem 1rem;
+      border-radius: .75rem;
+      transition: transform .3s ease;
+      &:hover {
+        transform: translateX(1rem);
+      }
+    }
   }
 }

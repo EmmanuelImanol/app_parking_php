@@ -3,6 +3,7 @@
 <div class="contenedor">
   <h1><?= $titulo ?></h1>
 
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque velit eius voluptate rem quasi repudiandae magnam minima unde. Sit dignissimos quibusdam nisi ea quidem eum eligendi distinctio, architecto in quae quis beatae iste cupiditate, autem blanditiis id dolorem, neque soluta perspiciatis consequatur. Dolores dolore rem perferendis amet explicabo quae laborum asperiores expedita provident laboriosam reprehenderit veritatis quis ratione inventore enim quas mollitia error in odit, vero accusamus? Necessitatibus, accusamus quisquam! Minus, voluptatem asperiores? Et rerum nihil alias vel in ipsa repudiandae tenetur adipisci? Error nisi fuga tempora perspiciatis voluptatibus ullam. Vel reiciendis recusandae omnis consequuntur id aspernatur voluptatum quo excepturi.</p>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi, eos fuga omnis inventore expedita culpa nemo aut. Inventore neque explicabo error veritatis doloremque eveniet recusandae optio soluta! Sequi reprehenderit sapiente eius id dignissimos autem ut veritatis, possimus a modi numquam libero recusandae repudiandae quas voluptas. Ex id delectus amet, vero est nobis nemo obcaecati, voluptates quidem veniam porro fugit atque! Iure corrupti nihil molestias eveniet earum velit molestiae repudiandae provident sed deleniti soluta, cum iusto. Ratione fuga debitis illo tempora distinctio magnam incidunt nemo nisi dolorum aspernatur labore magni, non ullam expedita tempore inventore molestias corrupti provident. Quaerat, nemo error.</p>
+  <div>
+    Usuarios
+  </div>
 </div>

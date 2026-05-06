@@ -11,13 +11,6 @@ const paths = {
   js: 'src/js/**/*.js'
 }
 
-export function js( done ) {
-  src(paths.js)
-    .pipe( terser() )
-    .pipe( dest('./public/build/js') )
-  done()
-}
-
 export function css( done ) {
   src(paths.scss, {sourcemaps: true})
     .pipe( sass({
@@ -27,9 +20,16 @@ export function css( done ) {
   done()
 }
 
+export function js( done ) {
+  src(paths.js)
+    .pipe( terser() )
+    .pipe( dest('./public/build/js') )
+  done()
+}
+
 export function dev() {
-  watch("src/scss/**/*.scss", css)
-  watch("src/js/**/*.js", js)
+  watch( paths.scss, css)
+  watch( paths.js, js)
 }
 
 export default series( js, css, dev )
