@@ -84,17 +84,18 @@ btnRegistrarEntrada.addEventListener('click', (e) => {
 function submitRegistrarEntrada() {
   const placa = document.querySelector('#placa').value.trim();
   const observaciones = document.querySelector('#observaciones').value.trim();
-  const tipoVehiculo = document.querySelector('input[name="tipoVehiculo"]:checked').value
-  const vehiculo = {
-    placa,
-    observaciones,
-    tipoVehiculo
-  };
+  const tipoVehiculoInput = document.querySelector('input[name="tipoVehiculo"]:checked');
 
-  if(vehiculo.placa === '' || vehiculo.observaciones === '') {
+  if(vehiculo.placa === '' || vehiculo.observaciones === '' || !tipoVehiculoInput) {
     mostrarAlertas({ error: ['Todos los campos son obligatorios'] })
     return;
   }
+  
+  const vehiculo = {
+    placa,
+    observaciones,
+    tipoVehiculo: tipoVehiculoInput.value
+  };
 
   entradaVehiculo(vehiculo);
 }
