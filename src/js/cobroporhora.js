@@ -12,13 +12,15 @@ let tarifas = {};
 let vehiculos = [];
 let vehiculoId = null;
 
-registrosEntrada.addEventListener('click', (e) => {
-  const tarjeta = e.target.closest('.vehiculo-entrada');
-  if(!tarjeta) return;
-  const id = Number(tarjeta.dataset.id);
-  const vehiculo = vehiculos.find(v => v.id === id);
-  abrirModal(vehiculo);
-})
+if(modalRegistros) {
+  registrosEntrada.addEventListener('click', (e) => {
+    const tarjeta = e.target.closest('.vehiculo-entrada');
+    if(!tarjeta) return;
+    const id = Number(tarjeta.dataset.id);
+    const vehiculo = vehiculos.find(v => v.id === id);
+    abrirModal(vehiculo);
+  })
+}
 
 function abrirModal(vehiculo) {
   const { id, placa, observaciones, tipoVehiculo, horaEntrada } = vehiculo;
@@ -42,8 +44,12 @@ function abrirModal(vehiculo) {
   modalRegistrosContenedor.classList.add('visible');
 }
 
-btnModalCerrar.addEventListener('click', cerrarModal);
-btnModalCobrar.addEventListener('click', cobrarSalida);
+if(btnModalCerrar) {
+  btnModalCerrar.addEventListener('click', cerrarModal);
+}
+if(btnModalCobrar) {
+  btnModalCobrar.addEventListener('click', cobrarSalida);
+}
 
 function cerrarModal() {
   modalRegistrosContenedor.classList.remove('visible');
@@ -229,5 +235,7 @@ function iniciarCronometro(horaEntrada, elementoID) {
   }, 1000);
 }
 
-consultarAPI();
-obtenerTarifas();
+if(registrosEntrada) {
+  consultarAPI();
+  obtenerTarifas();
+}
