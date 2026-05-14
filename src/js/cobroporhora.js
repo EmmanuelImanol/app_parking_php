@@ -238,7 +238,5 @@ function iniciarCronometro(horaEntrada, elementoID) {
   }, 1000);
 }
 
-if(registrosEntrada.lenght) {
-  consultarAPI();
-  obtenerTarifas();
-}
+consultarAPI();
+obtenerTarifas();
