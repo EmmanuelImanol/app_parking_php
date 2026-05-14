@@ -56,7 +56,7 @@ async function cobrarSalida() {
   datos.append('id', vehiculoId);
 
   try {
-    const url = '/api/cobroporhora/salida';
+    const url = `${API_URL}/cobroporhora/salida`;
     const respuesta = await fetch(url, {
       method: 'POST',
       body: datos
@@ -101,7 +101,7 @@ function submitRegistrarEntrada() {
 
 async function obtenerTarifas() {
   try {
-    const url = '/api/tarifas';
+    const url = `${API_URL}/tarifas`;
     const respuesta = await fetch(url);
     const datos = await respuesta.json();
     
@@ -116,7 +116,7 @@ async function obtenerTarifas() {
 
 async function consultarAPI() {
   try {
-    const url = '/api/cobroporhora';
+    const url = `${API_URL}/cobroporhora`;
     const respuesta = await fetch(url);
     const vehiculos = await respuesta.json();
     mostrarVehiculos(vehiculos);
@@ -173,7 +173,7 @@ async function entradaVehiculo(vehiculo) {
   datos.append('tipoVehiculo', tipoVehiculo);
 
   try {
-    const url = '/api/cobroporhora/entrada';
+    const url = `${API_URL}/cobroporhora/entrada`;
     const respuesta = await fetch(url, {
       method: 'POST',
       body: datos
