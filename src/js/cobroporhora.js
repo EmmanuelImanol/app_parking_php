@@ -82,10 +82,13 @@ async function cobrarSalida() {
   }
 }
 
-btnRegistrarEntrada.addEventListener('click', (e) => {
-  e.preventDefault();
-  submitRegistrarEntrada();
-})
+if(btnRegistrarEntrada) {
+  btnRegistrarEntrada.addEventListener('click', (e) => {
+    e.preventDefault();
+    submitRegistrarEntrada();
+  })
+}
+
 
 function submitRegistrarEntrada() {
   const placa = document.querySelector('#placa').value.trim();
