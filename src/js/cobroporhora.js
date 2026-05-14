@@ -86,7 +86,7 @@ function submitRegistrarEntrada() {
   const observaciones = document.querySelector('#observaciones').value.trim();
   const tipoVehiculoInput = document.querySelector('input[name="tipoVehiculo"]:checked');
 
-  if(vehiculo.placa === '' || vehiculo.observaciones === '' || !tipoVehiculoInput) {
+  if(placa === '' || observaciones === '' || !tipoVehiculoInput) {
     mostrarAlertas({ error: ['Todos los campos son obligatorios'] })
     return;
   }
