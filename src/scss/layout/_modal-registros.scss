@@ -1,0 +1,162 @@
+@use 'sass:color';
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.modal-registros-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+
+    .modal-contenido {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .modal-contenido {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    transition: transform .28s cubic-bezier(0.34, 1.2, 0.64, 1),
+                opacity .22s ease;
+    background-color: v.$blanco;
+    border-radius: 1rem;
+    width: 30rem;
+    overflow: hidden;
+
+    .modal-header {
+      padding: 1.25rem 1.5rem 1rem;
+      text-align: center;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+
+      .icono-ring {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: #E6F1FB;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto .8rem;
+
+        i {
+          font-size: 2rem;
+          color: #185FA5;
+        }
+      }
+
+      .modal-placa {
+        font-size: 2.6rem;
+        font-weight: 500;
+        letter-spacing: .08em;
+        color: v.$negro;
+        margin-bottom: 0;
+      }
+
+      .modal-subtitulo {
+        font-size: 1.2rem;
+        color: v.$gris;
+        margin-top: .3rem;
+      }
+    }
+
+    .modal-chips {
+      padding: 1rem 1.5rem;
+      @include m.grid(1, .8rem);
+    }
+
+    .chip {
+      background-color: v.$gris-claro;
+      border-radius: 1rem;
+      padding: 1rem 1.2rem;
+
+      &-label {
+        font-size: 1.1rem;
+        color: v.$gris;
+        margin-bottom: .3rem;
+
+        i {
+          font-size: 1.3rem;
+          vertical-align: -1px;
+          margin-right: .4rem;
+        }
+      }
+
+      &-valor {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: v.$negro;
+        line-height: 1.4;
+      }
+
+      &--ingreso {
+        grid-column: 1 / -1;
+        background: #E6F1FB;
+
+        .chip-label { color: #185FA5; }
+        .chip-valor  { color: #0C447C; }
+      }
+
+       &--observaciones {
+        grid-column: 1 / -1;
+        background: v.$gris-claro;
+        border-left: 3px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0 10px 10px 0;
+
+        .chip-valor { font-weight: 400; color: #eee; }
+      }
+
+      &--monto .chip-valor {
+        font-size: 22px;
+        color: #0C447C;
+      }
+    }
+
+    .contenedor-botones {
+      padding: 0.75rem 1.5rem 1.25rem;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-modal-cerrar,
+    .btn-modal-cobrar {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      transition: background .2s ease;
+    }
+
+    .btn-modal-cerrar {
+      background: transparent;
+      border: 1.5px solid v.$rojo;
+      color: color.scale(v.$rojo, $lightness: -20%);
+
+      &:hover {
+        background: color.scale(v.$rojo, $lightness: 40%);
+      }
+    }
+
+    .btn-modal-cobrar {
+      background: v.$verde;
+      color: v.$blanco;
+
+      &:hover {
+        background: color.scale(v.$verde, $lightness: -20%);
+      }
+    }
+  }
+}

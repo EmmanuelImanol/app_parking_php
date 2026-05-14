@@ -94,11 +94,13 @@
 <?php 
   $base_url_app = base_url('/build/js/app.js');
   $base_url_usuarios = base_url('/build/js/usuarios.js');
+  $base_url_utils = base_url('/build/js/utils.js');
   $script .= "
     <script> 
       const API_URL = '" . $_ENV['API_URL'] . "';
     </script>
-    <script src='{$base_url_app}'></script>
-    <script src='{$base_url_usuarios}'></script>
+    <script src='{$base_url_app}'  type='module'></script>
+    <script src='{$base_url_usuarios}' type='module'></script>
+    <script src='{$base_url_utils}' type='module'></script>
   "; 
 ?>

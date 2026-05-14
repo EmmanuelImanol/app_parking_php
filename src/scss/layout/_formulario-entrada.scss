@@ -1,0 +1,71 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.formulario-entrada {
+  max-width: 95%;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-color: #ccc;
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include m.tablet {
+    width: 70%;
+  }
+  @include m.desktop {
+    width: 50%;
+  }
+
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    input:not([type="submit"]) {
+      width: 100%;
+      border: none;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid #ccc;
+    }
+  }
+  .radios {
+    display: flex;
+    gap: 1rem;
+
+    .radio-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+      cursor: pointer;
+      padding: .8rem 1.2rem;
+      border: 2px solid #ddd;
+      border-radius: .8rem;
+    }
+
+    .radio-option input[type="radio"] { display: none; }
+    .radio-option:has(input:checked) {
+      border-color: #4361ee;
+      background: #eef0fd;
+    }
+  }
+
+  .submit-registrar-entrada {
+    background-color: v.$indigo;
+    border: none;
+    color: v.$blanco;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    font-weight: bold;
+    transition: all .3s ease;
+    &:hover {
+      background-color: v.$indigo_oscuro;
+      transform: scale(1.01);
+    }
+  }
+}

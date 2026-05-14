@@ -5,6 +5,7 @@ include_once __DIR__ . '/../includes/app.php';
 use Controllers\CobroPorHoraController;
 use Controllers\DashboardController;
 use Controllers\LoginController;
+use Controllers\TarifasController;
 use Controllers\UsuariosController;
 use MVC\Router;
 
@@ -25,5 +26,11 @@ $router->post('/api/usuario/eliminar', [UsuariosController::class, 'eliminar']);
 
 
 $router->get('/dashboard/cobroporhora', [CobroPorHoraController::class, 'index']);
+$router->get('/api/cobroporhora', [CobroPorHoraController::class, 'obtenerRegistrosEntrada']);
+$router->post('/api/cobroporhora/entrada', [CobroPorHoraController::class, 'entradaVehiculo']);
+$router->post('/api/cobroporhora/salida', [CobroPorHoraController::class, 'salidaVehiculo']);
+
+// API Tarifas
+$router->get('/api/tarifas', [TarifasController::class, 'obtenerTarifas']);
 
 $router->comprobarRutas();

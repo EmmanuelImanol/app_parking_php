@@ -1,0 +1,57 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.contenedor-registros {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  @include m.grid(1, 2rem);
+  @include m.telefono {
+    @include m.grid(2, 2rem);
+  }
+  @include m.tablet {
+    @include m.grid(2, 2rem);
+  }
+  @include m.desktop {
+    @include m.grid(3, 2rem);
+  }
+
+  .vehiculo-entrada {
+    background-color: v.$indigo;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid v.$indigo_oscuro;
+    transition: all .3s ease;
+
+    p {
+      color: v.$blanco;
+      text-align: center;
+    }
+    
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      box-shadow: v.$boxShadow;
+    }
+
+    .placa {
+      color: v.$blanco;
+      font-weight: bold;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      border: 5px solid v.$indigo_oscuro;
+    }
+
+    .cronometro {
+      font-weight: bold;
+      background-color: v.$indigo_oscuro;
+      text-align: center;
+      border-radius: 2rem;
+      color: white;
+      align-items: end;
+      font-family: 'Courier New', Courier, monospace;
+      margin-top: 1rem;
+      font-size: 1.6rem;
+    }
+  }
+}

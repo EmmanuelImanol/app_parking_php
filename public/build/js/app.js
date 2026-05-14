@@ -1,1 +1,1 @@
-document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".sidebar__menu"),t=document.querySelector(".sidebar__navbar"),n=document.querySelector(".alertas-contenedor");e&&t&&e.addEventListener("click",function(){t.classList.toggle("activo")}),n&&setTimeout(()=>{n.style.display="none"},3e3)});
+document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".sidebar__menu"),t=document.querySelector(".sidebar__navbar");e&&t&&e.addEventListener("click",function(){t.classList.toggle("activo")})});

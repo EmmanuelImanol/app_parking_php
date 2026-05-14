@@ -82,10 +82,12 @@ class ActiveRecord {
     $atributos = $this->atributos();
     $sanitizado = [];
     foreach ($atributos as $key => $value) {
-      // ✅ CAMBIO 6: quote() reemplaza a escape_string()
-      // DIFERENCIA IMPORTANTE: quote() ya incluye las comillas => 'valor'
-      // escape_string() solo escapaba => valor (sin comillas)
-      $sanitizado[$key] = self::$db->quote($value ?? '');
+      // Si es null o string vacío → NULL real de SQL (sin comillas)
+      if (is_null($value) || $value === '') {
+        $sanitizado[$key] = 'NULL';
+      } else {
+        $sanitizado[$key] = self::$db->quote($value);
+      }
     }
     return $sanitizado;
   }
@@ -162,7 +164,7 @@ class ActiveRecord {
     try {
       $resultado = self::$db->query($query);
       return [
-        'resultado' => $resultado,
+        'resultado' => !!$resultado,
         // ✅ CAMBIO 8: lastInsertId() reemplaza a insert_id
         'id' => self::$db->lastInsertId()
       ];
