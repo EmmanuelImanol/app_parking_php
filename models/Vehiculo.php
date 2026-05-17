@@ -6,6 +6,8 @@ class Vehiculo extends ActiveRecord {
   protected static string $tabla = 'registroVehiculos';
   protected static array $columnasDB = [
     'id',
+    'clienteId',
+    'usuarioId',
     'placa',
     'observaciones',
     'tipoVehiculo',
@@ -16,6 +18,9 @@ class Vehiculo extends ActiveRecord {
     'estado'
   ];
 
+
+  public ?int $clienteId;
+  public ?int $usuarioId;
   public string $placa;
   public ?string $observaciones;
   public string $tipoVehiculo;
@@ -28,6 +33,8 @@ class Vehiculo extends ActiveRecord {
   public function __construct(array $args = [])
   {
     $this->id = $args['id'] ?? null;
+    $this->clienteId = $args['clienteId'] ?? null;
+    $this->usuarioId = $args['usuarioId'] ?? null;
     $this->placa = strtoupper($args['placa'] ?? '');
     $this->observaciones = $args['observaciones'] ?? '';
     $this->tipoVehiculo = $args['tipoVehiculo'] ?? 'auto';

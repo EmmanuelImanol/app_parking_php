@@ -424,6 +424,10 @@ body > section {
   text-transform: uppercase;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .hidden {
   display: none;
 }
@@ -907,13 +911,6 @@ body > section {
   gap: 2rem;
   grid-template-columns: repeat(1, 1fr);
 }
-@media (min-width: 480px) {
-  .contenedor-registros {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 @media (min-width: 768px) {
   .contenedor-registros {
     display: grid;
@@ -927,6 +924,10 @@ body > section {
     gap: 2rem;
     grid-template-columns: repeat(3, 1fr);
   }
+}
+.contenedor-registros .sin-registros {
+  text-align: center;
+  color: #888780;
 }
 .contenedor-registros .vehiculo-entrada {
   background-color: #6366f1;
@@ -1052,7 +1053,6 @@ body > section {
   line-height: 1.4;
 }
 .modal-registros-contenedor .modal-contenido .chip--ingreso {
-  grid-column: 1/-1;
   background: #E6F1FB;
 }
 .modal-registros-contenedor .modal-contenido .chip--ingreso .chip-label {
@@ -1062,14 +1062,13 @@ body > section {
   color: #0C447C;
 }
 .modal-registros-contenedor .modal-contenido .chip--observaciones {
-  grid-column: 1/-1;
   background: #F1EFE8;
   border-left: 3px solid rgba(0, 0, 0, 0.15);
   border-radius: 0 10px 10px 0;
 }
 .modal-registros-contenedor .modal-contenido .chip--observaciones .chip-valor {
   font-weight: 400;
-  color: #eee;
+  color: #888780;
 }
 .modal-registros-contenedor .modal-contenido .chip--monto .chip-valor {
   font-size: 22px;
@@ -1107,6 +1106,229 @@ body > section {
   background: rgb(59.072, 148.928, 144.768);
 }
 
+.modal-ticket-contenedor {
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+  padding: 1rem;
+}
+.modal-ticket-contenedor .modal-ticket {
+  background-color: #FFFFFF;
+  border-radius: 1.2rem;
+  width: 100%;
+  max-width: 36rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: "Courier New", monospace;
+}
+.modal-ticket-contenedor .modal-ticket .ticket-header {
+  background: #0f172a;
+  padding: 16px 18px 14px;
+  text-align: center;
+  border-radius: 12px 12px 0 0;
+}
+.modal-ticket-contenedor .modal-ticket .ticket-header-texto p {
+  margin: 0;
+}
+.modal-ticket-contenedor .modal-ticket #ticketSucursal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  font-family: sans-serif;
+  margin-bottom: 4px !important;
+}
+.modal-ticket-contenedor .modal-ticket #ticketDireccion {
+  font-size: 11px;
+  color: #94a3b8;
+  font-family: sans-serif;
+  margin-bottom: 10px !important;
+}
+.modal-ticket-contenedor .modal-ticket .ticket-tipo-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: sans-serif;
+  background: #1d4ed8;
+  color: #bfdbfe;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.modal-ticket-contenedor .ticket-divisor {
+  border: none;
+  border-top: 1px dashed #e2e8f0;
+  margin: 0;
+}
+.modal-ticket-contenedor .ticket-seccion {
+  padding: 10px 18px;
+}
+.modal-ticket-contenedor .ticket-seccion .ticket-seccion-titulo {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.modal-ticket-contenedor .ticket-seccion .ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 11px;
+  padding: 4px 0;
+  border-bottom: 0.5px solid #f1f5f9;
+  gap: 8px;
+}
+.modal-ticket-contenedor .ticket-seccion .ticket-row:last-child {
+  border-bottom: none;
+}
+.modal-ticket-contenedor .ticket-seccion .ticket-row .lbl {
+  color: #64748b;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.modal-ticket-contenedor .ticket-seccion .ticket-row .val {
+  color: #0f172a;
+  text-align: right;
+  font-weight: 500;
+  word-break: break-word;
+}
+.modal-ticket-contenedor .ticket-seccion .ticket-row .val.mono {
+  font-family: "Courier New", monospace;
+}
+.modal-ticket-contenedor .ticket-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 18px 10px;
+  gap: 6px;
+}
+.modal-ticket-contenedor .ticket-qr #ticketQR canvas,
+.modal-ticket-contenedor .ticket-qr #ticketQR img {
+  border: 5px solid #f1f5f9;
+  border-radius: 8px;
+  display: block;
+}
+.modal-ticket-contenedor .ticket-qr .ticket-qr-label {
+  margin: 0;
+  font-size: 9px;
+  color: #94a3b8;
+  font-family: sans-serif;
+  text-align: center;
+}
+.modal-ticket-contenedor .ticket-qr .ticket-qr-codigo {
+  margin: 0;
+  font-size: 9px;
+  color: #94a3b8;
+  font-family: "Courier New", monospace;
+  text-align: center;
+  word-break: break-all;
+  padding: 0 8px;
+}
+.modal-ticket-contenedor .ticket-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: #f8fafc;
+  border-top: 1px dashed #e2e8f0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+.modal-ticket-contenedor .ticket-total .total-label {
+  font-size: 12px;
+  font-family: sans-serif;
+  color: #64748b;
+}
+.modal-ticket-contenedor .ticket-total .total-valor {
+  font-size: 22px;
+  font-weight: 500;
+  font-family: sans-serif;
+  color: #0f172a;
+}
+.modal-ticket-contenedor .ticket-pie {
+  background: #0f172a;
+  padding: 10px 18px;
+  text-align: center;
+}
+.modal-ticket-contenedor .ticket-pie p {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  font-family: sans-serif;
+}
+.modal-ticket-contenedor .ticket-acciones {
+  display: flex;
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+.modal-ticket-contenedor .ticket-acciones button {
+  flex: 1;
+  padding: 13px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: sans-serif;
+  transition: background 0.15s;
+}
+.modal-ticket-contenedor .ticket-acciones #ticketBtnImprimir {
+  background: #0f172a;
+  color: #fff;
+  border-right: 1px solid #1e293b;
+}
+.modal-ticket-contenedor .ticket-acciones #ticketBtnImprimir:hover {
+  background: #1e293b;
+}
+.modal-ticket-contenedor .ticket-acciones #ticketBtnCerrar {
+  background: #f8fafc;
+  color: #374151;
+}
+.modal-ticket-contenedor .ticket-acciones #ticketBtnCerrar:hover {
+  background: #e2e8f0;
+}
+
+@media print {
+  body > *:not(#modalTicket) {
+    display: none !important;
+  }
+  .modal-overlay {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .modal-ticket {
+    max-height: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .ticket-acciones {
+    display: none !important;
+  }
+}
+@media print {
+  body > *:not(#modalTicket) {
+    display: none !important;
+  }
+  .modal-overlay {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .modal-ticket {
+    max-height: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .ticket-acciones {
+    display: none !important;
+  }
+}
 .dashboard {
   display: flex;
   flex-direction: column;

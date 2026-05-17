@@ -1,1 +1,1 @@
-document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".sidebar__menu"),t=document.querySelector(".sidebar__navbar");e&&t&&e.addEventListener("click",function(){t.classList.toggle("activo")})});
+document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".sidebar__menu"),t=document.querySelector(".sidebar__navbar");e&&t&&(e.addEventListener("click",function(){t.classList.toggle("activo")}),document.addEventListener("click",n=>{t.contains(n.target)||e.contains(n.target)||t.classList.remove("activo")}))});

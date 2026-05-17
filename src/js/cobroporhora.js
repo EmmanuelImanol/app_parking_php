@@ -1,4 +1,4 @@
-import { mostrarAlertas } from "./utils.js";
+import { mostrarAlertas, formatearFecha, mostrarTicket } from "./utils.js";
 
 const btnRegistrarEntrada = document.querySelector('.submit-registrar-entrada');
 const formEntrada = document.querySelector('#formEntrada');
@@ -73,6 +73,7 @@ async function cobrarSalida() {
     if(resultado.resultado) {
       mostrarAlertas({ exito: [resultado.mensaje] });
       cerrarModal();
+      await mostrarTicket(resultado.ticket);
       consultarAPI();
     } else {
       mostrarAlertas({ error: [resultado.mensaje] });
@@ -138,6 +139,13 @@ async function consultarAPI() {
 function mostrarVehiculos(data) {
   vehiculos = data;
   registrosEntrada.innerHTML = '';
+
+  if(data.length === 0) {
+    registrosEntrada.innerHTML = `
+      <p class="sin-registros">No hay vehículos en el estacionamiento</p>
+    `;
+    return;
+  }
   data.forEach(vehiculo => {
     const { id, placa, observaciones, tipoVehiculo, horaEntrada } = vehiculo;
 
@@ -153,6 +161,7 @@ function mostrarVehiculos(data) {
     observacionesVehiculo.textContent = observaciones;
 
     const vehiculoTipo = document.createElement('P');
+    vehiculoTipo.classList.add('capitalize');
     vehiculoTipo.textContent = tipoVehiculo;
 
     const horaEntradaVehiculo = document.createElement('P');
@@ -192,6 +201,7 @@ async function entradaVehiculo(vehiculo) {
     const resultado = await respuesta.json();
     if(resultado.resultado) {
       mostrarAlertas({ exito: [resultado.mensaje]});
+      await mostrarTicket(resultado.ticket);
       registrosEntrada.innerHTML = '';
       consultarAPI();
       formEntrada.reset();
@@ -202,18 +212,6 @@ async function entradaVehiculo(vehiculo) {
   } catch (error) {
     console.log(error);
   }
-}
-
-function formatearFecha(fechaEntrada) {
-  const fecha = new Date(fechaEntrada);
-  return new Intl.DateTimeFormat('es-MX', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true
-  }).format(fecha);
 }
 
 function iniciarCronometro(horaEntrada, elementoID) {

@@ -7,12 +7,14 @@ class Usuario extends ActiveRecord {
   protected static string $tabla = 'usuarios';
   protected static array $columnasDB = [
     'id',
+    'clienteId',
     'nombre',
     'email',
     'rol',
     'password'
   ];
 
+  public ?int $clienteId;
   public string $nombre;
   public string $email;
   public string $rol;
@@ -22,6 +24,7 @@ class Usuario extends ActiveRecord {
   public function __construct(array $args = [])
   {
     $this->id = $args['id'] ?? null;
+    $this->clienteId = $args['clienteId'] ?? null;
     $this->nombre = $args['nombre'] ?? '';
     $this->email = $args['email'] ?? '';
     $this->rol = $args['rol'] ?? 'cajero';

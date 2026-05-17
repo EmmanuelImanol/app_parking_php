@@ -100,7 +100,6 @@
       }
 
       &--ingreso {
-        grid-column: 1 / -1;
         background: #E6F1FB;
 
         .chip-label { color: #185FA5; }
@@ -108,12 +107,11 @@
       }
 
        &--observaciones {
-        grid-column: 1 / -1;
         background: v.$gris-claro;
         border-left: 3px solid rgba(0, 0, 0, 0.15);
         border-radius: 0 10px 10px 0;
 
-        .chip-valor { font-weight: 400; color: #eee; }
+        .chip-valor { font-weight: 400; color: v.$gris; }
       }
 
       &--monto .chip-valor {

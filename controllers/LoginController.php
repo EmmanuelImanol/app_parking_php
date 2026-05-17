@@ -25,6 +25,7 @@ class LoginController {
             // Iniciar Sesión
             session_start();
             $_SESSION['id'] = $usuario->id;
+            $_SESSION['clienteId'] = $usuario->clienteId;
             $_SESSION['nombre'] = $usuario->nombre;
             $_SESSION['email'] = $usuario->email;
             $_SESSION['rol'] = $usuario->rol;

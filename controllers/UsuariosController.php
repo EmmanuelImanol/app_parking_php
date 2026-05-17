@@ -15,19 +15,29 @@ class UsuariosController {
   }
 
   public static function obtenerUsuarios() {
-    $usuarios = Usuario::all();
+    session_start();
+    isAuth();
+    $clienteId = $_SESSION['clienteId'];
+
+    $usuarios = Usuario::belongsTo('clienteId', $clienteId);
 
     $usuarios = array_map(function($usuario) {
       unset($usuario->password, $usuario->password_confirm);
       return $usuario;
-    }, $usuarios);
+    }, $usuarios ?? []);
 
     echo json_encode($usuarios);
   }
 
   public static function crear() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      session_start();
+      isAuth();
+
       $usuario = new Usuario($_POST);
+
+      $usuario->clienteId = $_SESSION['clienteId'];
+
       $alertas = $usuario->validarNuevoUsuario();
 
       if(!empty($alertas)) {
@@ -51,17 +61,14 @@ class UsuariosController {
 
   public static function actualizar() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      session_start();
+      isAuth();
+
       $id = $_POST['id'] ?? null;
-
-      if(!$id) {
-        echo json_encode(['resultado' => false, 'mensaje' => 'ID no proporcionado']);
-        return;
-      }
-
       $usuario = Usuario::find($id);
 
-      if(!$usuario) {
-        echo json_encode(['resultado' => false, 'mensaje' => 'Usuario no encontrado']);
+      if(!$usuario || $usuario->clienteId !== $_SESSION['clienteId']) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'Acceso no autorizado']);
         return;
       }
 
@@ -90,17 +97,13 @@ class UsuariosController {
 
   public static function eliminar() {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      session_start();
+      isAuth();
       $id = $_POST['id'] ?? null;
-
-      if(!$id) {
-        echo json_encode(['resultado' => false, 'mensaje' => 'ID no proporcionado']);
-        return;
-      }
-
       $usuario = Usuario::find($id);
 
-      if(!$usuario) {
-        echo json_encode(['resultado' => false, 'mensaje' => 'Usuario no encontrado']);
+      if(!$usuario || $usuario->clienteId !== $_SESSION['clienteId']) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'Acceso no autorizado']);
         return;
       }
 
