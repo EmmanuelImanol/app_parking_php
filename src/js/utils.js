@@ -1,4 +1,7 @@
 let toastContenedor = document.querySelector('.toast-contenedor');
+const modalTicket = document.querySelector('#modalTicket');
+const btnImprimir = document.querySelector('#ticketBtnImprimir');
+const btnCerrar = document.querySelector('#ticketBtnCerrar');
 
 if(!toastContenedor) {
   toastContenedor = document.createElement('DIV');
@@ -7,7 +10,7 @@ if(!toastContenedor) {
 }
 
 function cerrarModalTicket() {
-  document.querySelector('#modalTicket').style.display = 'none';
+  if(modalTicket) modalTicket.style.display = 'none';
 }
 
 function generarQR(codigoQR) {
@@ -43,16 +46,19 @@ function generarQR(codigoQR) {
   });
 }
 
-// ── Listeners (se registran una sola vez al cargar el módulo) ──
-document.querySelector('#ticketBtnImprimir').addEventListener('click', () => {
-  window.print();
-});
+// ── Listeners — solo si los elementos existen en esta página ──
+if(btnImprimir) {
+  btnImprimir.addEventListener('click', () => window.print());
+}
 
-document.querySelector('#modalTicket').addEventListener('click', (e) => {
-  if(e.target === document.querySelector('#ticketBtnCerrar')) cerrarModalTicket();
-});
+if(modalTicket) {
+  modalTicket.addEventListener('click', (e) => {
+    if(e.target === btnCerrar) cerrarModalTicket();
+  });
+}
 
 export async function mostrarTicket(datos) {
+  if(!modalTicket) return;
   document.getElementById('ticketSucursal').textContent  = datos.nombreSucursal    ?? '—';
   document.getElementById('ticketDireccion').textContent = datos.direccion          ?? '—';
   document.getElementById('ticketTipoBadge').textContent = datos.tipoTicket ?? '—';
@@ -82,7 +88,7 @@ export async function mostrarTicket(datos) {
     : '—';
   document.getElementById('ticketCodigoQR').textContent = datos.codigoQR ?? '—';
     
-  document.getElementById('modalTicket').style.display = 'flex';
+  modalTicket.style.display = 'flex';
 
   try {
     await generarQR(datos.codigoQR);
