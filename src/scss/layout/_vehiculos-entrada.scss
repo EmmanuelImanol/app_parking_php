@@ -5,17 +5,21 @@
   margin-top: 5rem;
   margin-bottom: 2rem;
   @include m.grid(1, 2rem);
-  
-  @include m.tablet {
+
+  .sin-registros {
+    text-align: center;
+    background-color: v.$gris-claro;
+    border-radius: 1rem;
+    color: v.$gris;
+    padding: 2rem;
+    grid-column: 1 / 4;
+  }
+
+  @include m.telefono {
     @include m.grid(2, 2rem);
   }
   @include m.desktop {
     @include m.grid(3, 2rem);
-  }
-
-  .sin-registros {
-    text-align: center;
-    color: v.$gris;
   }
 
   .vehiculo-entrada {

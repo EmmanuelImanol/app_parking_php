@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
@@ -15,14 +16,60 @@
     margin: 0 auto;
   }
 
+  .btn-login {
+    background-color: v.$indigo-velvet;
+    border: none;
+    cursor: pointer;
+    color: v.$mauve;
+    font-weight: bold;
+    padding: 1rem 0;
+    border-radius: 1rem;
+    transition: all .2s ease;
+    &:hover {
+      background-color: v.$indigo-ink;
+    }
+  }
+
   .campo {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
 
     input {
-      padding: 1rem 2rem;
-      border: 1px solid #eee;
+      padding: 1rem 3.8rem 1rem 3.8rem;
+      outline: none;
+      border: 1px solid v.$gris;
+      border-radius: 1rem;
+      width: 100%;
+      color: v.$gris;
+    }
+
+    &__input {
+      position: relative;
+    }
+
+    &__icono,
+    &__ojo {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: v.$gris;
+    }
+
+    &__icono {
+      left: 0.9rem;
+      pointer-events: none;
+    }
+
+    &__ojo {
+      display: none;
+      right: 1rem;
+      cursor: pointer;
+      transition: all .3s ease;
+
+      &:hover {
+        color: color.adjust(v.$gris, $lightness: -30%);
+      }
     }
   }
 }

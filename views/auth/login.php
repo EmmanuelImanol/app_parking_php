@@ -3,22 +3,30 @@
   <form action="<?= base_url('/') ?>" class="formulario-login" method="POST" novalidate>
     <div class="campo">
       <label for="email">Email: </label>
-      <input 
-        type="email"
-        id="email"
-        name="email"
-        placeholder="ejemplo@parking.com"
-      >
+      <div class="campo__input">
+        <i class="fa-solid fa-envelope campo__icono"></i>
+        <input 
+          type="email"
+          id="email"
+          name="email"
+          placeholder="ejemplo@parking.com"
+        >
+      </div>
     </div>
     <div class="campo">
       <label for="password">Contraseña:</label>
-      <input 
-        type="password" 
-        name="password" 
-        id="password"
-      >
+      <div class="campo__input">
+        <i class="fa-solid fa-lock campo__icono"></i>
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="Contraseña"
+          id="password"
+        >
+        <i class="fa-solid fa-eye campo__ojo" id="togglePassword"></i>
+      </div>
     </div>
-    <input type="submit" value="Iniciar Sesión">
+    <input type="submit" class="btn-login" value="Iniciar Sesión">
   </form>
 </div>
 
