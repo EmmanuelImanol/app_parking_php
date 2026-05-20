@@ -1544,6 +1544,7 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
 .formulario-configuracion__body .tarifa-row {
   flex-direction: row;
   align-items: center;
+  overflow: hidden;
 }
 .formulario-configuracion__body div {
   display: flex;
