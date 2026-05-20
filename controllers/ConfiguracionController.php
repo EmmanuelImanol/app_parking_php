@@ -12,7 +12,7 @@ class ConfiguracionController {
     isAuth();
     isAdmin();
 
-    $clienteId = $_SESSION['id'];
+    $clienteId = $_SESSION['clienteId'];
     $tarifas = Tarifa::belongsTo('clienteId', $clienteId);
     
     $router->render('dashboard/configuracion/index', [
@@ -25,18 +25,9 @@ class ConfiguracionController {
     session_start();
     isAuth();
     isAdmin();
-    $clienteId = $_SESSION['id'];
+    $clienteId = $_SESSION['clienteId'];
     $configuracion = ClientesEstacionamiento::where('id', $clienteId);
     echo json_encode($configuracion);
-  }
-
-  public static function obtenerDatosTarifas() {
-      session_start();
-      isAuth();
-      isAdmin();
-      $clienteId = $_SESSION['id'];
-      $tarifas = Tarifa::belongsTo('clienteId', $clienteId);
-      echo json_encode($tarifas);
   }
 
   public static function actualizarDatosConfiguracion() {
@@ -69,6 +60,62 @@ class ConfiguracionController {
         ]);
       }
 
+    }
+  }
+
+  public static function actualizarTarifa() {
+    session_start();
+    isAuth();
+    isAdmin();
+
+    $alertas = [];
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $clienteId = $_SESSION['clienteId'];
+
+      $datos = json_decode(file_get_contents('php://input'), true);
+
+      if(!$datos) {
+        echo json_encode(['resultado' => false, 'mensaje' => 'Datos no válidos']);
+        return;
+      }
+
+      foreach($datos as $tarifaData) {
+        // Crear instancia del modelo para usar sus validaciones
+        $tarifa = new Tarifa([
+          'tipo' => $tarifaData['tipo'] ?? '',
+          'horaTarifa' => $tarifaData['horaTarifa'] ?? 0,
+        ]);
+
+        // Conectar las validaciones del modelo
+        $alertas = $tarifa->validarNuevaTarifa();
+        if(!empty($alertas)) {
+          echo json_encode([
+            'resultado' => false,
+            'alertas' => $alertas
+          ]);
+          return;
+        }
+
+        // Busca el registro real en BD y verifica que pertenece al cliente
+        $tarifaDB = Tarifa::find($tarifaData['id']);
+        if(!$tarifaDB || (int)$tarifaDB->clienteId !== (int)$clienteId) {
+          echo json_encode([
+            'resultado' => false, 
+            'mensaje' => 'Tarifa no autorizada'
+          ]);
+          return;
+        }
+
+        $tarifaDB->tipo = strtolower(trim($tarifaData['tipo']));
+        $tarifaDB->horaTarifa = $tarifaData['horaTarifa'];
+        $tarifaDB->actualizar();
+      }
+
+      echo json_encode([
+        'resultado' => true,
+        'mensaje'   => 'Tarifas actualizadas correctamente'
+      ]);
     }
   }
 }

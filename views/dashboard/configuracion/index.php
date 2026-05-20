@@ -6,7 +6,7 @@
 
 <div class="contenedor">
   <h1><?= $titulo ?></h1>
-  <form class="formulario-configuracion">
+  <form class="formulario-configuracion" id="formEstacionamiento">
     <div class="formulario-configuracion__header">
       <h2>Mi Estacionamiento</h2>
       <p>Aqui puedes modificar la información de tu estacionamiento</p>
@@ -46,7 +46,7 @@
     </div>
   </form> <!-- .formulario-configuracion -->
 
-  <form class="formulario-configuracion">
+  <form class="formulario-configuracion" id="formTarifas">
     <div class="formulario-configuracion__header">
       <h2>Tarifas</h2>
       <p>Aqui puedes modificar las tarifas de tu estacionamiento</p>
@@ -58,14 +58,18 @@
             <input 
               type="text"
               id="tipoTarifa-<?= $tarifa->id ?>"
+              data-id="<?= $tarifa->id ?>"
               name="tipo"
               value="<?= htmlspecialchars($tarifa->tipo) ?>"
             >
           </div>
-          <div>
+          <div class="input-tarifa">
+            <span>$</span>
             <input 
-              type="text"
+              type="number"
+              min="0"
               id="horaTarifa-<?= $tarifa->id ?>"
+              data-id="<?= $tarifa->id ?>"
               name="horaTarifa"
               value="<?= htmlspecialchars($tarifa->horaTarifa) ?>"
             >

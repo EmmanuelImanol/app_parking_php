@@ -25,4 +25,18 @@ class Tarifa extends ActiveRecord {
     $this->horaTarifa = $args['horaTarifa'] ?? 0.0;
     $this->activo = $args['activo'] ?? 1;
   }
+
+  public function validarNuevaTarifa() {
+    if(!$this->tipo) {
+      self::$alertas['error'][] = 'El tipo de tarifa es obligatorio';
+    }
+    if(!$this->horaTarifa) {
+      self::$alertas['error'][] = 'La tarifa es obligatoria';
+    }
+    if($this->horaTarifa <= 0) {
+      self::$alertas['error'][] = 'La tarifa debe ser mayor a 0';
+    }
+
+    return self::$alertas;
+  }
 }

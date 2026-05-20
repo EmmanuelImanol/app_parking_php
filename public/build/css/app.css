@@ -1546,6 +1546,28 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
   align-items: center;
   overflow: hidden;
 }
+.formulario-configuracion__body .tarifa-row .input-tarifa {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+.formulario-configuracion__body .tarifa-row .input-tarifa span {
+  background-color: #5a189a;
+  color: #e0aaff;
+  padding: 1rem;
+  font-weight: bold;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border: 1px solid #5a189a;
+}
+.formulario-configuracion__body .tarifa-row .input-tarifa input {
+  border: 1px solid #5a189a;
+  width: 7rem;
+  padding: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
 .formulario-configuracion__body div {
   display: flex;
   flex-direction: column;

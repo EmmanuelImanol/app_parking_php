@@ -30,6 +30,31 @@
       flex-direction: row;
       align-items: center;
       overflow: hidden;
+
+      .input-tarifa {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+
+        span {
+          background-color: v.$indigo-velvet;
+          color: v.$mauve;
+          padding: 1rem;
+          font-weight: bold;
+          border-top-left-radius: 1rem;
+          border-bottom-left-radius: 1rem;
+          border: 1px solid v.$indigo-velvet;
+        }
+
+        input {
+          border: 1px solid v.$indigo-velvet;
+          width: 7rem;
+          padding: 1rem;
+          border-top-right-radius: 1rem;
+          border-bottom-right-radius: 1rem;
+        }
+      }
     }
     
     div {
