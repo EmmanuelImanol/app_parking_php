@@ -2,73 +2,110 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
-.formulario-login {
-  padding: 2rem;
-  border-radius: 1rem;
+.contenedor-login {
+  width: 95%;
+  margin: 0 auto;
+
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  align-items: center;
   height: 100vh;
+  color: v.$indigo-ink;
+
+  .formulario-login {
+    border: 1px solid v.$indigo-velvet;
+
+    &__header {
+      background-color: v.$indigo-velvet;
+      padding: 2rem;
+    }
   
-  @include m.tablet {
-    width: 50%;
-    margin: 0 auto;
-  }
-
-  .btn-login {
-    background-color: v.$indigo-velvet;
-    border: none;
-    cursor: pointer;
-    color: v.$mauve;
-    font-weight: bold;
-    padding: 1rem 0;
-    border-radius: 1rem;
-    transition: all .2s ease;
-    &:hover {
-      background-color: v.$indigo-ink;
-    }
-  }
-
-  .campo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    input {
-      padding: 1rem 3.8rem 1rem 3.8rem;
-      outline: none;
-      border: 1px solid v.$gris;
-      border-radius: 1rem;
-      width: 100%;
-      color: v.$gris;
+    &__titulo {
+      margin: 0;
+      color: v.$mauve;
+      font-size: 3rem;
     }
 
-    &__input {
-      position: relative;
+    &__body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem 4rem;
+    }
+    
+    @include m.telefono {
+      width: 70%;
+    }
+  
+    @include m.tablet {
+      width: 50%;
     }
 
-    &__icono,
-    &__ojo {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: v.$gris;
+    @include m.desktop {
+      width: 40%;
     }
-
-    &__icono {
-      left: 0.9rem;
-      pointer-events: none;
-    }
-
-    &__ojo {
-      display: none;
-      right: 1rem;
+  
+    .btn-login {
+      background-color: v.$indigo-velvet;
+      border: none;
       cursor: pointer;
-      transition: all .3s ease;
-
+      color: v.$mauve;
+      border: 1px solid v.$indigo-velvet;
+      font-weight: bold;
+      padding: 1rem 0;
+      border-radius: 1rem;
+      transition: all .2s ease;
       &:hover {
-        color: color.adjust(v.$gris, $lightness: -30%);
+        background-color: v.$blanco;
+        color: v.$indigo-velvet;
+      }
+    }
+  
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+  
+      input {
+        padding: 1rem 3.8rem 1rem 3.8rem;
+        outline: none;
+        border: 1px solid v.$indigo-velvet;
+        border-radius: 1rem;
+        width: 100%;
+        color: v.$indigo-velvet;
+        background-color: v.$blanco;
+
+        &::placeholder {
+          color: v.$indigo-velvet;
+        }
+      }
+  
+      &__input {
+        position: relative;
+      }
+  
+      &__icono,
+      &__ojo {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: v.$indigo-velvet;
+      }
+  
+      &__icono {
+        left: 0.9rem;
+        pointer-events: none;
+      }
+  
+      &__ojo {
+        display: none;
+        right: 1rem;
+        cursor: pointer;
+        transition: all .3s ease;
+  
+        &:hover {
+          color: color.adjust(v.$mauve, $lightness: -30%);
+        }
       }
     }
   }

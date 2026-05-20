@@ -23,42 +23,80 @@
   }
 
   .vehiculo-entrada {
-    background-color: v.$indigo;
+    background-color: v.$blanco;
     border-radius: 1rem;
-    padding: 1rem;
-    border: 1px solid v.$indigo_oscuro;
+    border: 1px solid v.$gris-claro;
+    overflow: hidden;                    // ✅ el header no desborda el border-radius
     transition: all .3s ease;
 
-    p {
-      color: v.$blanco;
-      text-align: center;
-    }
-    
     &:hover {
       cursor: pointer;
       transform: scale(1.03);
       box-shadow: v.$boxShadow;
     }
 
-    .placa {
-      color: v.$blanco;
-      font-weight: bold;
-      padding: 1rem 2rem;
-      border-radius: 1rem;
-      text-align: center;
-      border: 5px solid v.$indigo_oscuro;
+    // --- Header sólido morado ---
+    &__header {
+      background-color: v.$indigo-velvet;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .placa {
+        color: v.$blanco;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 2rem;
+      }
+
+      .tipo-badge {
+        background-color: v.$mauve;
+        color: v.$indigo-velvet;
+        font-size: 1.6rem;
+        padding: .2rem .65rem;
+        border-radius: 2rem;
+      }
     }
 
-    .cronometro {
-      font-weight: bold;
-      background-color: v.$indigo_oscuro;
-      text-align: center;
-      border-radius: 2rem;
-      color: white;
-      align-items: end;
-      font-family: 'Courier New', Courier, monospace;
-      margin-top: 1rem;
-      font-size: 1.6rem;
+    // --- Cuerpo limpio ---
+    &__body {
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+
+      .fila {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .label {
+          font-size: 1.8rem;
+          color: v.$gris;
+        }
+
+        .valor {
+          font-size: 1.6rem;
+          color: v.$negro;
+          font-weight: 500;
+        }
+      }
+
+      .cronometro {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-size: 1.8rem;
+        color: v.$negro;
+      }
+    }
+
+    // --- Footer con fecha ---
+    &__footer {
+      border-top: 1px solid v.$gris-claro;
+      padding: .65rem 1.25rem;
+      font-size: 1.8rem;
+      color: v.$gris;
     }
   }
 }

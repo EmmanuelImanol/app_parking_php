@@ -51,6 +51,12 @@ class ClientesEstacionamiento extends ActiveRecord {
     if(!$this->regimenFiscal) {
       self::$alertas['error'][] = 'El régimen fiscal es obligatorio';
     }
+    if(!$this->representacionLegal) {
+      self::$alertas['error'][] = 'La representación legal es obligatoria';
+    }
+    if(!$this->telefonoContacto) {
+      self::$alertas['error'][] = 'El teléfono de contacto es obligatorio';
+    }
 
     return self::$alertas;
   }

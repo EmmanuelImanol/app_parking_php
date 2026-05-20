@@ -32,7 +32,11 @@ class LoginController {
             $_SESSION['login'] = true;
 
             // Redireccionar
-            header('Location: ' . base_url('/dashboard'));
+            if($_SESSION['rol'] === 'admin') {
+              header('Location: ' . base_url('/dashboard'));
+            } else {
+              header('Location: ' . base_url('/dashboard/cobroporhora'));
+            }
 
           } else {
             Usuario::setAlerta('error', 'Password Incorrecto');

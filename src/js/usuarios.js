@@ -52,39 +52,103 @@ async function consultarAPI() {
   }
 }
 
+function obtenerIniciales(nombre) {
+  const partes = nombre.trim().split(' ');
+  if (partes.length >= 2) {
+    // Tiene nombre y apellido → primera letra de cada uno
+    return (partes[0][0] + partes[1][0]).toUpperCase();
+  }
+  // Solo un nombre → primeras dos letras
+  return nombre.substring(0, 2).toUpperCase();
+}
+
 // Abrir modal en modo EDITAR al hacer click en tarjeta
 function mostrarUsuarios(usuarios) {
   usuarios.forEach( usuario => {
     const { id, nombre, email, rol } = usuario;
-    const nombreUsuario = document.createElement('P');
-    nombreUsuario.textContent = nombre;
+    const esCajero = rol === 'cajero';
 
-    const emailUsuario = document.createElement('P');
-    emailUsuario.textContent = email;
-    
-    const rolUsuario = document.createElement('P');
-    rolUsuario.textContent = rol;
+    // Avatar
+    const avatar = document.createElement('DIV');
+    avatar.classList.add('usuario__avatar');
+    if (esCajero) avatar.classList.add('usuario__avatar--cajero');
+    avatar.textContent = obtenerIniciales(nombre);
+
+    // Nombre
+    const nombreEl = document.createElement('P');
+    nombreEl.classList.add('usuario__nombre');
+    nombreEl.textContent = nombre;
+
+    //Badge de rol
+    const rolBadgeEl = document.createElement('SPAN');
+    rolBadgeEl.classList.add('usuario__rol');
+    if (esCajero) rolBadgeEl.classList.add('usuario__rol--cajero');
+    rolBadgeEl.textContent = rol.charAt(0).toUpperCase() + rol.slice(1);
+
+    // Info (nombre + rol)
+    const info = document.createElement('DIV');
+    info.classList.add('usuario__info');
+    info.appendChild(nombreEl);
+    info.appendChild(rolBadgeEl);
+
+    // Cabecera
+    const cabecera = document.createElement('DIV');
+    cabecera.classList.add('usuario__cabecera');
+    cabecera.appendChild(avatar);
+    cabecera.appendChild(info);
+
+    // Divisor
+    const divisor1 = document.createElement('HR');
+    divisor1.classList.add('usuario__divisor');
+
+    // Email en cuerpo
+    const dato = document.createElement('SPAN');
+    dato.classList.add('usuario__dato');
+    dato.textContent = email;
+
+    const cuerpo = document.createElement('DIV');
+    cuerpo.classList.add('usuario__cuerpo');
+    cuerpo.appendChild(dato);
+
+    // Divisor footer
+    const divisor2 = document.createElement('HR');
+    divisor2.classList.add('usuario__divisor');
+
+    // Botones
+    const btnEditar = document.createElement('BUTTON');
+    btnEditar.textContent = 'Editar';
+    btnEditar.classList.add('btn-editar');
+    btnEditar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      abrirModal('editar', usuario);
+    });
 
     const btnEliminar = document.createElement('BUTTON');
     btnEliminar.textContent = 'Eliminar';
     btnEliminar.classList.add('btn-eliminar');
-
     btnEliminar.addEventListener('click', (e) => {
       e.stopPropagation();
       confirmarEliminar(id, usuarioDiv);
-    })
+    });
 
+    const footer = document.createElement('DIV');
+    footer.classList.add('usuario__footer');
+    footer.appendChild(btnEditar);
+    footer.appendChild(btnEliminar);
+
+    // Tarjeta completa
     const usuarioDiv = document.createElement('DIV');
     usuarioDiv.classList.add('usuario');
     usuarioDiv.dataset.idUsuario = id;
-
-    usuarioDiv.appendChild(nombreUsuario);
-    usuarioDiv.appendChild(emailUsuario);
-    usuarioDiv.appendChild(rolUsuario);
-    usuarioDiv.appendChild(btnEliminar);
+    usuarioDiv.appendChild(cabecera);
+    usuarioDiv.appendChild(divisor1);
+    usuarioDiv.appendChild(cuerpo);
+    usuarioDiv.appendChild(divisor2);
+    usuarioDiv.appendChild(footer);
 
     usuarioDiv.addEventListener('click', () => abrirModal('editar', usuario));
     contenedorUsuarios.appendChild(usuarioDiv);
+    
   });
 }
 

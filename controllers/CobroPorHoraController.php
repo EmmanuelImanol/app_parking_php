@@ -24,10 +24,13 @@ class CobroPorHoraController {
     session_start();
     isAuth();
     $clienteId = $_SESSION['clienteId'];
+    $usuarioId = $_SESSION['id'];
 
     $registros = Vehiculo::consultarSQL(
       "SELECT * FROM registroVehiculos
-       WHERE clienteId = '$clienteId' AND estado = 'activo'"
+       WHERE clienteId = '$clienteId' 
+       AND usuarioId = '$usuarioId'
+       AND estado = 'activo'"
     );
     echo json_encode($registros);
   }

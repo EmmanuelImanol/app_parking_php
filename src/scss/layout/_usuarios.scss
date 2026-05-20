@@ -1,38 +1,44 @@
+@use 'sass:color';
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
-
 .btn-crear {
-  background-color: v.$indigo;
+  background-color: v.$indigo-velvet;
   border: none;
   margin-bottom: 2rem;
   padding: 1rem;
   width: 100%;
-  color: white;
+  color: v.$mauve;
   font-weight: bold;
+  border-radius: 1rem;
   transition: all .3s ease;
+
   @include m.telefono {
     width: auto;
   }
 
   &:hover {
-    background-color: v.$indigo_oscuro;
+    background-color: v.$indigo-ink;
     cursor: pointer;
-    transform: translatey(-.5rem)
+    transform: translateY(-.5rem);
   }
 }
 
 .contenedor-usuarios {
   margin-bottom: 2rem;
   @include m.grid(1, 2rem);
+
   @include m.tablet {
     @include m.grid(2, 2rem);
   }
+
   @include m.desktop {
     @include m.grid(3, 2rem);
   }
+
   &__contenedor {
     @include m.grid(1, 2rem);
+
     @include m.tablet {
       padding: 2rem;
       height: 51rem;
@@ -40,36 +46,129 @@
       overflow-y: auto;
       @include m.grid(2, 2rem);
     }
+
     @include m.desktop {
       @include m.grid(1, 2rem);
     }
   }
 
   .usuario {
-    background-color: v.$verde;
     border-radius: 1rem;
-    padding: 1rem;
-    transition: all .3s ease;
-    p {
-      color: v.$blanco;
-    }
+    border: 1px solid color.adjust(v.$indigo-velvet, $lightness: 40%);
+    overflow: hidden;
+    transition: box-shadow .3s ease, transform .3s ease;
+    cursor: pointer;
+
     &:hover {
-      transform: translateY(-1rem);
-      cursor: pointer;
-      box-shadow: 7px 13px 12px -5px rgba(0,0,0,0.1);
+      transform: translateY(-.5rem);
+      box-shadow: 7px 13px 12px -5px rgba(0, 0, 0, 0.1);
     }
 
-    .btn-eliminar {
-      background: v.$rojo;
+    // ── Cabecera ────────────────────────────
+    &__cabecera {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.4rem;
+    }
+
+    &__avatar {
+      width: 4.4rem;
+      height: 4.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      flex-shrink: 0;
+      background-color: v.$mauve;
+      color: v.$indigo-velvet;
+
+      &--cajero {
+        background-color: #e1f5ee;
+        color: #085041;
+      }
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    &__nombre {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: v.$indigo-velvet;
+      margin: 0;
+    }
+
+    // ── Badge de rol ─────────────────────────
+    &__rol {
+      display: inline-block;
+      width: fit-content;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.2rem 0.9rem;
+      border-radius: 2rem;
+      background-color: v.$mauve;
+      color: v.$indigo-velvet;
+
+      &--cajero {
+        background-color: #e1f5ee;
+        color: #085041;
+      }
+    }
+
+    // ── Divisor ───────────────────────────────
+    &__divisor {
       border: none;
-      color: v.$blanco;
+      border-top: 1px solid color.adjust(v.$indigo-velvet, $lightness: 45%);
+      margin: 0;
+    }
+
+    // ── Cuerpo ────────────────────────────────
+    &__cuerpo {
+      padding: 0.8rem 1.4rem;
+    }
+
+    &__dato {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: v.$gris;
+    }
+
+    // ── Footer ────────────────────────────────
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.8rem;
+      padding: 0.9rem 1.4rem;
+    }
+
+    // ── Botones ───────────────────────────────
+    .btn-editar,
+    .btn-eliminar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      border-radius: 0.6rem;
+      border: 1px solid transparent;
       cursor: pointer;
-      margin-top: 1rem;
-      padding: .75rem 1rem;
-      border-radius: .75rem;
-      transition: transform .3s ease;
+      transition: all .2s ease;
+    }
+
+    .btn-editar,
+    .btn-eliminar {
+      background-color: transparent;
+      border-color: color.adjust(v.$indigo-velvet, $lightness: 25%);
+      color: v.$indigo-velvet;
+
       &:hover {
-        transform: translateX(1rem);
+        background-color: color.adjust(v.$mauve, $lightness: 10%);
       }
     }
   }

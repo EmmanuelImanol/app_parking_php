@@ -9,6 +9,7 @@ class UsuariosController {
   public static function index(Router $router) {
     session_start();
     isAuth();
+    isAdmin();
     $router->render('dashboard/usuarios/index', [
       'titulo' => 'Usuarios'
     ]);
@@ -17,6 +18,7 @@ class UsuariosController {
   public static function obtenerUsuarios() {
     session_start();
     isAuth();
+    isAdmin();
     $clienteId = $_SESSION['clienteId'];
 
     $usuarios = Usuario::belongsTo('clienteId', $clienteId);
@@ -33,6 +35,7 @@ class UsuariosController {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
       session_start();
       isAuth();
+      isAdmin();
 
       $usuario = new Usuario($_POST);
 
@@ -63,6 +66,7 @@ class UsuariosController {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
       session_start();
       isAuth();
+      isAdmin();
 
       $id = $_POST['id'] ?? null;
       $usuario = Usuario::find($id);
@@ -99,11 +103,29 @@ class UsuariosController {
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
       session_start();
       isAuth();
+      isAdmin();
+
       $id = $_POST['id'] ?? null;
       $usuario = Usuario::find($id);
 
       if(!$usuario || $usuario->clienteId !== $_SESSION['clienteId']) {
         echo json_encode(['resultado' => false, 'mensaje' => 'Acceso no autorizado']);
+        return;
+      }
+
+      if($usuario->rol === 'admin') {
+        echo json_encode([
+          'resultado' => false,
+          'mensaje' => 'No se puede eliminar al adminisrador'
+        ]);
+        return;
+      }
+
+      if((int)$usuario->id === (int)$_SESSION['id']) {
+        echo json_encode([
+          'resultado' => false,
+          'mensaje' => 'No puedes eliminar tu propio usuario'
+        ]);
         return;
       }
 

@@ -1,0 +1,81 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.formulario-configuracion {
+  margin-top: 2rem;
+  border: 1px solid v.$indigo-velvet;
+  
+  @include m.desktop {
+    width: 70%;
+    margin: 2rem auto;
+  }
+
+  &__header {
+    background-color: v.$mauve;
+    padding: 2rem;
+    border-bottom: 1px solid v.$indigo-velvet;
+    
+    p, h2 {
+      color: v.$indigo-velvet;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem 3rem;
+
+    .tarifa-row {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+  
+      label {
+        color: v.$indigo-velvet;
+      }
+  
+      input,
+      textarea {
+        border: none;
+        outline: none;
+      }
+
+      textarea {
+        height: 7rem;
+      }
+
+      @include m.telefono {
+        textarea {
+          height: auto;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    border-top: 1px solid v.$indigo-velvet;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-configuracion {
+      border: 1px solid v.$indigo-velvet;
+      background-color: transparent;
+      color: v.$indigo-velvet;
+      font-weight: bold;
+      padding: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: v.$indigo-velvet;
+        color: v.$mauve;
+      }
+    }
+  }
+}

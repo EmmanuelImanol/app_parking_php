@@ -13,6 +13,12 @@ function isAuth() : void {
   }
 }
 
+function isAdmin() {
+  if(!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+    header('Location: ' . base_url('/dashboard/cobroporhora'));
+  }
+}
+
 function base_url(string $path = ''): string {
   return ($_ENV['APP_URL'] ?? '') . $path;
 }

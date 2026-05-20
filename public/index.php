@@ -3,6 +3,7 @@
 include_once __DIR__ . '/../includes/app.php';
 
 use Controllers\CobroPorHoraController;
+use Controllers\ConfiguracionController;
 use Controllers\DashboardController;
 use Controllers\LoginController;
 use Controllers\TarifasController;
@@ -32,5 +33,10 @@ $router->post('/api/cobroporhora/salida', [CobroPorHoraController::class, 'salid
 
 // API Tarifas
 $router->get('/api/tarifas', [TarifasController::class, 'obtenerTarifas']);
+
+$router->get('/dashboard/configuracion', [ConfiguracionController::class, 'index']);
+$router->get('/api/configuracion/estacionamiento', [ConfiguracionController::class, 'obtenerDatosConfiguracion']);
+$router->get('/api/configuracion/tarifas', [ConfiguracionController::class, 'obtenerDatosTarifas']);
+$router->post('/api/configuracion/actualizar', [ConfiguracionController::class, 'actualizarDatosConfiguracion']);
 
 $router->comprobarRutas();

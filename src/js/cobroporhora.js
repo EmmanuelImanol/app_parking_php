@@ -149,37 +149,59 @@ function mostrarVehiculos(data) {
   data.forEach(vehiculo => {
     const { id, placa, observaciones, tipoVehiculo, horaEntrada } = vehiculo;
 
-    const cronometroDisplay = document.createElement('P');
-    cronometroDisplay.classList.add('cronometro');
-    cronometroDisplay.textContent = 'Calculando Tiempo...'
+    const header = document.createElement('DIV');
+    header.classList.add('vehiculo-entrada__header');
 
-    const placaVehiculo = document.createElement('P');
-    placaVehiculo.classList.add('placa');
-    placaVehiculo.textContent = placa;
+    const placaEl = document.createElement('SPAN');
+    placaEl.classList.add('placa');
+    placaEl.textContent = placa;
 
-    const observacionesVehiculo = document.createElement('P');
-    observacionesVehiculo.textContent = observaciones;
+    const badgeEl = document.createElement('SPAN');
+    badgeEl.classList.add('tipo-badge');
+    badgeEl.textContent = tipoVehiculo;
 
-    const vehiculoTipo = document.createElement('P');
-    vehiculoTipo.classList.add('capitalize');
-    vehiculoTipo.textContent = tipoVehiculo;
+    header.appendChild(placaEl);
+    header.appendChild(badgeEl);
 
-    const horaEntradaVehiculo = document.createElement('P');
-    horaEntradaVehiculo.textContent = formatearFecha(horaEntrada);
-  
-    const vehiculoDIV = document.createElement('DIV');
-    vehiculoDIV.classList.add('vehiculo-entrada');
-    vehiculoDIV.dataset.id = id;
-  
-    vehiculoDIV.appendChild(placaVehiculo);
-    vehiculoDIV.appendChild(cronometroDisplay);
-    vehiculoDIV.appendChild(observacionesVehiculo);
-    vehiculoDIV.appendChild(vehiculoTipo);
-    vehiculoDIV.appendChild(horaEntradaVehiculo);
-    
-    registrosEntrada.appendChild(vehiculoDIV);
+    const body = document.createElement('DIV');
+    body.classList.add('vehiculo-entrada__body');
 
-    iniciarCronometro(horaEntrada, cronometroDisplay);
+    const filaCrono = document.createElement('DIV');
+    filaCrono.classList.add('fila');
+    filaCrono.innerHTML = `
+      <span class="label">Tiempo</span>
+    `;
+
+    const cronometroEl = document.createElement('SPAN');
+    cronometroEl.classList.add('valor', 'cronometro');
+    cronometroEl.textContent = '00:00:00';
+    filaCrono.appendChild(cronometroEl);
+
+    const filaObs = document.createElement('DIV');
+    filaObs.classList.add('fila');
+    filaObs.innerHTML = `
+      <span class="label">Vehiculo</span>
+      <span class="valor">${observaciones}</span>
+    `;
+
+    body.appendChild(filaCrono);
+    body.appendChild(filaObs);
+
+    const footer = document.createElement('DIV');
+    footer.classList.add('vehiculo-entrada__footer');
+    footer.textContent = formatearFecha(horaEntrada);
+
+    const tarjeta = document.createElement('DIV');
+    tarjeta.classList.add('vehiculo-entrada');
+    tarjeta.dataset.id = id;
+
+    tarjeta.appendChild(header);
+    tarjeta.appendChild(body);
+    tarjeta.appendChild(footer);
+
+    registrosEntrada.appendChild(tarjeta);
+
+    iniciarCronometro(horaEntrada, cronometroEl);
   });
 }
 

@@ -2,10 +2,7 @@
 @use 'base/mixins' as m;
 
 .formulario-entrada {
-  max-width: 95%;
-  margin: 0 auto;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  border-color: #ccc;
+  border: 1px solid v.$gris;
   border-radius: 1rem;
   padding: 2rem;
   display: flex;
@@ -29,7 +26,7 @@
       border: none;
       padding: 1rem;
       border-radius: 1rem;
-      border: 1px solid #ccc;
+      border: 1px solid v.$gris;
     }
   }
   .radios {
@@ -43,28 +40,31 @@
       gap: .3rem;
       cursor: pointer;
       padding: .8rem 1.2rem;
-      border: 2px solid #ddd;
+      border: 2px solid v.$gris-claro;
       border-radius: .8rem;
     }
 
     .radio-option input[type="radio"] { display: none; }
     .radio-option:has(input:checked) {
-      border-color: #4361ee;
-      background: #eef0fd;
+      border-color: v.$mauve;
+      background-color: v.$indigo-velvet;
+      color: v.$mauve;
+      font-weight: bold;
     }
   }
 
   .submit-registrar-entrada {
-    background-color: v.$indigo;
-    border: none;
-    color: v.$blanco;
+    border: 1px solid v.$gris;
+    background-color: v.$blanco;
+    color: v.$indigo-ink;
     padding: 1rem;
     cursor: pointer;
     border-radius: 1rem;
     font-weight: bold;
-    transition: all .3s ease;
+    transition: background-color .3s ease, transform .3s ease;
     &:hover {
-      background-color: v.$indigo_oscuro;
+      background-color: v.$indigo-ink;
+      color: v.$blanco;
       transform: scale(1.01);
     }
   }

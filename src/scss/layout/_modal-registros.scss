@@ -9,7 +9,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
-  z-index: 999;
+  z-index: 1000;
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s ease;
@@ -149,12 +149,23 @@
     }
 
     .btn-modal-cobrar {
-      background: v.$verde;
-      color: v.$blanco;
+      background: transparent;
+      border: 1.5px solid v.$verde;
+      color: color.scale(v.$verde, $lightness: -20%);
 
       &:hover {
         background: color.scale(v.$verde, $lightness: -20%);
+        color: v.$blanco;
       }
     }
+  }
+}
+
+body:has(.modal-registros-contenedor.visible) {
+  overflow: hidden;
+
+  // Bloquea también el scroll interno del dashboard si es necesario
+  .dashboard__contenido {
+    overflow: hidden !important;
   }
 }
