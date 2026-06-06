@@ -66,13 +66,22 @@
     border-radius: 1rem;
     box-sizing: border-box;
     width: 23rem;
+    flex-shrink: 0;
     height: 100%;
+
+    @include m.tablet {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+    }
   }
 
   &__navbar {
     display: flex;
     flex-direction: column;
     gap: .5rem; // Reducido para que los ítems queden más juntos
+    flex: 1;
   }
 
   // ── Enlace con estado activo mejorado ────────
@@ -120,6 +129,8 @@
   // ── Cerrar sesión en rojo ────────────────────
   .cerrar-sesion {
     color: #f09595;
+    flex-shrink: 0; // ← no se comprime nunca
+    margin-top: auto; // ← se pega al fondo
 
     &:hover {
       background-color: rgba(240, 149, 149, 0.12);
@@ -147,6 +158,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: auto;      // ← permite scroll si hay mucho contenido
+    overflow-x: hidden;
+    height: 100%;
   }
 }
 

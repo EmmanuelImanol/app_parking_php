@@ -11,6 +11,11 @@
     margin: 2rem auto;
   }
 
+  @include m.tablet {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
   .nueva-tarifa {
     display: none;
   }
@@ -31,10 +36,24 @@
     gap: 2rem;
     padding: 1rem 3rem;
 
+    @include m.tablet {
+      padding: 1rem 1.5rem;
+    }
+
     .tarifa-row {
       flex-direction: row;
       align-items: center;
       overflow: auto;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .input-tipo input {
+        width: 10rem;
+        
+        @include m.tablet {
+          width: 100%;
+        }
+      }
 
       &.tarifa-inactiva {
         opacity: 0.5;

@@ -1539,6 +1539,12 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
     margin: 2rem auto;
   }
 }
+@media (min-width: 768px) {
+  .formulario-configuracion {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
 .formulario-configuracion .nueva-tarifa {
   display: none;
 }
@@ -1556,10 +1562,25 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
   gap: 2rem;
   padding: 1rem 3rem;
 }
+@media (min-width: 768px) {
+  .formulario-configuracion__body {
+    padding: 1rem 1.5rem;
+  }
+}
 .formulario-configuracion__body .tarifa-row {
   flex-direction: row;
   align-items: center;
   overflow: auto;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.formulario-configuracion__body .tarifa-row .input-tipo input {
+  width: 10rem;
+}
+@media (min-width: 768px) {
+  .formulario-configuracion__body .tarifa-row .input-tipo input {
+    width: 100%;
+  }
 }
 .formulario-configuracion__body .tarifa-row.tarifa-inactiva {
   opacity: 0.5;
@@ -1772,12 +1793,22 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
   border-radius: 1rem;
   box-sizing: border-box;
   width: 23rem;
+  flex-shrink: 0;
   height: 100%;
+}
+@media (min-width: 768px) {
+  .dashboard__sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+  }
 }
 .dashboard__navbar {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex: 1;
 }
 .dashboard__enlace {
   color: rgba(255, 255, 255, 0.75);
@@ -1816,6 +1847,8 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
 }
 .dashboard .cerrar-sesion {
   color: #f09595;
+  flex-shrink: 0;
+  margin-top: auto;
 }
 .dashboard .cerrar-sesion:hover {
   background-color: rgba(240, 149, 149, 0.12);
@@ -1840,6 +1873,9 @@ body:has(.modal-registros-contenedor.visible) .dashboard__contenido {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
   }
 }
 
