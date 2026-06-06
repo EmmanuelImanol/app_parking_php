@@ -3,9 +3,15 @@
 @use 'base/mixins' as m;
 
 .dashboard {
+  // Aseguramos que el viewport no estire el layout hacia los lados en ninguna resolución
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+
   @include m.tablet {
     margin: 1rem;
     height: calc(100vh - 2rem);
+    width: calc(100vw - 2rem); // ← Fuerza al layout a respetar el ancho de pantalla de la tablet
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -15,27 +21,33 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 
     @include m.tablet {
       flex-direction: row;
       height: 100%;
+      width: 100%;
+      min-width: 0; // ← Rompe la rigidez del contenedor Flexbox padre
     }
   }
 
   &__sidebar {
+    display: none;
     background-color: v.$indigo-velvet;
     padding: 2rem;
     border-radius: 1rem;
     box-sizing: border-box;
     width: 23rem;
-    flex-shrink: 0;
+    flex-shrink: 0; // Evita que se colapse en pantallas grandes
 
     @include m.tablet {
       display: flex;
       flex-direction: column;
-      height: 100%;          // ← altura completa del grid
-      overflow-y: auto;
-      overflow-x: hidden;
+      height: 100%; // ← Usa el 100% del contenedor padre (.dashboard__grid)
+      width: 22rem; // Un ancho equilibrado para tablets
+      flex-shrink: 0; // ← OBLIGATORIO: Garantiza que no se encoja ni se desplace a la izquierda
+      overflow-y: auto; // Por si hay demasiados links, crea scroll interno en la barra
+      gap: 2rem;
     }
   }
 
@@ -78,28 +90,12 @@
     font-size: 1.1rem;
   }
 
-  &__sidebar {
-    background-color: v.$indigo-velvet;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-sizing: border-box;
-    width: 23rem;
-    flex-shrink: 0;
-    height: 100%;
-
-    @include m.tablet {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow-y: auto;
-    }
-  }
-
   &__navbar {
     display: flex;
     flex-direction: column;
-    gap: .5rem; // Reducido para que los ítems queden más juntos
+    gap: .5rem; 
     flex: 1;
+    min-height: 0;
   }
 
   // ── Enlace con estado activo mejorado ────────
@@ -147,8 +143,8 @@
   // ── Cerrar sesión en rojo ────────────────────
   .cerrar-sesion {
     color: #f09595;
-    flex-shrink: 0; // ← no se comprime nunca
-    margin-top: auto; // ← se pega al fondo
+    flex-shrink: 0; 
+    margin-top: auto; // Se pega al fondo
 
     &:hover {
       background-color: rgba(240, 149, 149, 0.12);
@@ -158,27 +154,19 @@
 
   &__contenido {
     flex: 1;
+    min-width: 0; // ← Evita que los formularios rígidos empujen a la barra lateral
     box-sizing: border-box;
+    padding: 1rem; // Un pequeño colchón para que las tarjetas blancas no peguen al borde morado
   }
 
   @include m.tablet {
     &__contenido {
       overflow-y: auto;
+      overflow-x: hidden; // ← Bloquea cualquier scroll horizontal parásito del contenido derecho
       height: 100%;
+      width: 100%;
+      padding: 2rem;
     }
-  }
-}
-
-.dashboard__sidebar {
-  display: none;
-
-  @include m.tablet {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow-y: auto;      // ← permite scroll si hay mucho contenido
-    overflow-x: hidden;
-    height: 100%;
   }
 }
 
@@ -200,7 +188,6 @@
     display: none;
   }
 
-  // ── Logo móvil ────────────────────────────────
   &__logo {
     display: flex;
     align-items: center;
@@ -245,7 +232,6 @@
     }
   }
 
-  // ── Menú desplegable ──────────────────────────
   &__navbar {
     position: absolute;
     top: 7rem;

@@ -5,6 +5,7 @@
 .formulario-configuracion {
   margin-top: 2rem;
   border: 1px solid v.$indigo-velvet;
+  margin-bottom: 2rem;
   
   @include m.desktop {
     width: 70%;
@@ -13,7 +14,6 @@
 
   @include m.tablet {
     width: 100%;
-    margin: 1rem 0;
   }
 
   .nueva-tarifa {
