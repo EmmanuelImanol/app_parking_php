@@ -18,6 +18,24 @@
 
     @include m.tablet {
       flex-direction: row;
+      height: 100%;
+    }
+  }
+
+  &__sidebar {
+    background-color: v.$indigo-velvet;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    width: 23rem;
+    flex-shrink: 0;
+
+    @include m.tablet {
+      display: flex;
+      flex-direction: column;
+      height: 100%;          // ← altura completa del grid
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 
