@@ -1,0 +1,36 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.contenedor-botones {
+  margin-bottom: 5rem;
+  @include m.grid(1, 2rem);
+
+  @include m.telefono {
+    @include m.grid(2, 2rem);
+  }
+  @include m.desktop {
+    @include m.grid(4, 2rem);
+  }
+
+  .btn-accion-rapida {
+    border: .3rem solid v.$indigo-velvet;
+    border-radius: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 2.5rem;
+    text-align: center;
+    color: v.$indigo-velvet;
+    transition: all .3s ease;
+
+    @include m.telefono {
+      padding: 5rem 2.5rem;
+    }
+
+    &:hover {
+      transform: translateY(-1rem);
+      background-color: v.$indigo-velvet;
+      color: v.$mauve;
+    }
+  }
+}

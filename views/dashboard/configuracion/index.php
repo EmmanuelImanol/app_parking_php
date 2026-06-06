@@ -5,7 +5,7 @@
 ?>
 
 <div class="contenedor">
-  <h1><?= $titulo ?></h1>
+  <h1 class="titulo-pagina"><?= $titulo ?></h1>
   <form class="formulario-configuracion" id="formEstacionamiento">
     <div class="formulario-configuracion__header">
       <h2>Mi Estacionamiento</h2>
@@ -53,8 +53,8 @@
     </div>
     <div class="formulario-configuracion__body">
       <?php foreach($tarifas as $tarifa): ?>
-        <div class="tarifa-row">
-          <div>
+        <div class="tarifa-row <?= !$tarifa->activo ? 'tarifa-inactiva' : '' ?>">
+          <div class="input-tipo">
             <input 
               type="text"
               id="tipoTarifa-<?= $tarifa->id ?>"
@@ -74,10 +74,44 @@
               value="<?= htmlspecialchars($tarifa->horaTarifa) ?>"
             >
           </div>
+          <div>
+            <button
+              type="button"
+              class="btn-desactivar-tarifa"
+              data-id="<?= $tarifa->id ?>"
+              data-activo="<?= $tarifa->activo ?>"
+            >
+              <?= $tarifa->activo ? 'Desactivar' : 'Activar' ?>
+            </button>
+          </div>
         </div>
       <?php endforeach; ?>
+
+      <div id="nuevaTarifaForm" class="nueva-tarifa">
+        <div class="tarifa-row">
+          <div class="input-tipo">
+            <input 
+              type="text"
+              id="nuevoTipo"
+              name="tipo"
+              placeholder="Tipo de tarifa"
+            >
+          </div>
+          <div class="input-tarifa">
+            <span>$</span>
+            <input 
+              type="number"
+              min="0"
+              id="nuevaTarifaInput"
+              name="horaTarifa"
+              placeholder="0.00"
+            >
+          </div>
+        </div>
+      </div>
     </div>
     <div class="formulario-configuracion__footer">
+      <button type="button" id="btnAgregarTarifa" class="btn-agregar"> + Agregar tarifa</button>
       <button type="submit" class="btn-configuracion">Guardar Cambios</button>
     </div>
   </form>

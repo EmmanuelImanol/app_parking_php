@@ -38,6 +38,8 @@ $router->get('/dashboard/configuracion', [ConfiguracionController::class, 'index
 $router->get('/api/configuracion/estacionamiento', [ConfiguracionController::class, 'obtenerDatosConfiguracion']);
 $router->get('/api/configuracion/tarifas', [ConfiguracionController::class, 'obtenerDatosTarifas']);
 $router->post('/api/configuracion/actualizar', [ConfiguracionController::class, 'actualizarDatosConfiguracion']);
+$router->post('/api/tarifas/crear', [ConfiguracionController::class, 'crearTarifa']);
 $router->post('/api/tarifas/actualizar', [ConfiguracionController::class, 'actualizarTarifa']);
+$router->post('/api/tarifas/toggle', [ConfiguracionController::class, 'toggleTarifa']);
 
 $router->comprobarRutas();

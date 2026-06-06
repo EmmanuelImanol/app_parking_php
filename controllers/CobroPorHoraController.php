@@ -13,7 +13,12 @@ class CobroPorHoraController {
   public static function index(Router $router) {
     session_start();
     isAuth();
-    $tarifas = Tarifa::all();
+    $clienteId = $_SESSION['clienteId'];
+    $tarifas = Tarifa::consultarSQL(
+      "SELECT * FROM tarifas
+       WHERE clienteId = $clienteId
+       AND activo = '1'"
+    );
     $router->render('dashboard/cobroporhora/index', [
       'titulo' => 'Cobro por hora',
       'tarifas' => $tarifas // las pasa a la vista
@@ -194,7 +199,9 @@ class CobroPorHoraController {
       $horaSalida = new DateTime();
       $diferencia = $horaEntrada->diff($horaSalida);
       
-      $horas = ceil($diferencia->h + ($diferencia->i / 60));
+      // ← Incluye los días también por si el vehículo estuvo más de 24hrs
+      $totalMinutos = ($diferencia->days * 24 * 60) + ($diferencia->h * 60) + $diferencia->i;
+      $horas = max(1, ceil($totalMinutos / 60));
       $tarifa = Tarifa::find($vehiculo->tarifaId);
       $total = $horas * $tarifa->horaTarifa;
 

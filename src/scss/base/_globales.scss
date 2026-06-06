@@ -50,8 +50,12 @@ h3 {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 5rem;
+
+  @include m.telefono {
+    font-size: 4rem;
+  }
 }
 
 h2 {
@@ -73,6 +77,7 @@ img {
 body > section {
   padding: 10rem 0
 }
+
 .titulo-pagina {
   text-align: center;
   @include m.tablet {

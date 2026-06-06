@@ -219,39 +219,51 @@
 }
 
 @media print {
-  body > *:not(#modalTicket) {
-    display: none !important;
+  /* Oculta todo */
+  body * {
+    visibility: hidden;
   }
-  .modal-overlay {
-    position: static !important;
-    background: none !important;
-    padding: 0 !important;
-  }
-  .modal-ticket {
-    max-height: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-  }
-  .ticket-acciones {
-    display: none !important;
-  }
-}
 
-@media print {
-  body > *:not(#modalTicket) {
-    display: none !important;
+  /* Muestra solo el modal y su contenido */
+  #modalTicket,
+  #modalTicket * {
+    visibility: visible;
   }
-  .modal-overlay {
-    position: static !important;
+
+  /* Posiciona el modal en la esquina superior izquierda */
+  #modalTicket {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
     background: none !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
     padding: 0 !important;
   }
+
   .modal-ticket {
     max-height: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
+    width: 80mm !important; /* ← ancho estándar de ticket térmico */
+    font-size: 10px !important;
   }
+
+  /* Oculta los botones al imprimir */
   .ticket-acciones {
+    display: none !important;
+  }
+
+  /* ── Ticket de entrada — oculta total ── */
+  #modalTicket[data-tipo="entrada"] .ticket-total {
+    display: none !important;
+  }
+
+  /* ── Ticket de salida — oculta QR ── */
+  #modalTicket[data-tipo="salida"] .ticket-qr {
     display: none !important;
   }
 }

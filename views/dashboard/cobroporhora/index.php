@@ -6,7 +6,7 @@
 
 <div class="contenedor">
   <?php include_once __DIR__ . '/../../templates/alertas.php'; ?>
-  <h1><?= $titulo ?></h1>
+  <h1 class="titulo-pagina"><?= $titulo ?></h1>
 
   <form class="formulario-entrada" id="formEntrada" novalidate>
     <div class="campo">

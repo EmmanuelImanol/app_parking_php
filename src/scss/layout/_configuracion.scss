@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
@@ -8,6 +9,10 @@
   @include m.desktop {
     width: 70%;
     margin: 2rem auto;
+  }
+
+  .nueva-tarifa {
+    display: none;
   }
 
   &__header {
@@ -29,7 +34,60 @@
     .tarifa-row {
       flex-direction: row;
       align-items: center;
-      overflow: hidden;
+      overflow: auto;
+
+      &.tarifa-inactiva {
+        opacity: 0.5;
+
+        .input-tipo input,
+        .input-tarifa input {
+          pointer-events: none;
+        }
+      }
+
+      .btn-desactivar-tarifa {
+        border: 1px solid v.$indigo-velvet;
+        background-color: transparent;
+        color: v.$indigo-velvet;
+        font-weight: bold;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: v.$indigo-velvet;
+          color: v.$mauve;
+        }
+
+        &[data-activo="0"] {
+          border-color: green;
+          color: green;
+
+          &:hover {
+            background-color: green;
+            color: white;
+          }
+        }
+      }
+
+      .input-tipo {
+        input {
+          width: 10rem;
+          padding: 1rem;
+          background-color: v.$mauve;
+          border-radius: 1rem;
+          color: v.$indigo-velvet;
+          font-weight: bold;
+
+          &::placeholder {
+            color: color.adjust(v.$indigo-velvet, $lightness: 30%);
+          }
+
+          @include m.tablet {
+            width: 100%;
+          }
+        }
+      }
 
       .input-tarifa {
         display: flex;
@@ -49,10 +107,14 @@
 
         input {
           border: 1px solid v.$indigo-velvet;
-          width: 7rem;
+          width: 6rem;
           padding: 1rem;
           border-top-right-radius: 1rem;
           border-bottom-right-radius: 1rem;
+
+          &::placeholder {
+            color: v.$indigo-velvet;
+          }
         }
       }
     }
@@ -88,9 +150,11 @@
     border-top: 1px solid v.$indigo-velvet;
     padding: 1rem 3rem;
     display: flex;
+    gap: 2rem;
     justify-content: flex-end;
 
-    .btn-configuracion {
+    .btn-configuracion,
+    .btn-agregar {
       border: 1px solid v.$indigo-velvet;
       background-color: transparent;
       color: v.$indigo-velvet;

@@ -59,6 +59,26 @@ if(modalTicket) {
 
 export async function mostrarTicket(datos) {
   if(!modalTicket) return;
+
+  const esSalida = !!datos.horaSalida;
+
+  modalTicket.dataset.tipo = esSalida ? 'salida' : 'entrada';
+
+  const ticketTotalSection = document.querySelector('#ticketTotal')?.closest('.ticket-total');
+  const ticketQR = document.querySelector('.ticket-qr');
+
+  const ticketSalida = document.getElementById('ticketSalida').closest('.ticket-row');
+  const ticketTiempo = document.getElementById('ticketTiempo').closest('.ticket-row');
+
+  if(ticketSalida) ticketSalida.style.display = esSalida ? 'flex' : 'none';
+  if(ticketTiempo) ticketTiempo.style.display = esSalida ? 'flex' : 'none';
+
+  if(ticketTotalSection) {
+    ticketTotalSection.style.display = esSalida ? 'flex' : 'none';
+    // console.log('Total recibido:', datos.total); // ← debug temporal
+  }
+  if(ticketQR) ticketQR.style.display = esSalida ? 'none' : 'flex';
+
   document.getElementById('ticketSucursal').textContent  = datos.nombreSucursal    ?? '—';
   document.getElementById('ticketDireccion').textContent = datos.direccion          ?? '—';
   document.getElementById('ticketTipoBadge').textContent = datos.tipoTicket ?? '—';
@@ -83,9 +103,10 @@ export async function mostrarTicket(datos) {
     ? `$${parseFloat(datos.tarifa).toFixed(2)} / hr`
     : '—';
   // Total
-  document.getElementById('ticketTotal').textContent     = datos.total
-    ? `$${parseFloat(datos.total).toFixed(2)}`
-    : '—';
+  document.getElementById('ticketTotal').textContent = 
+    datos.total !== null && datos.total !== undefined
+      ? `$${parseFloat(datos.total).toFixed(2)}`
+      : '—';
   document.getElementById('ticketCodigoQR').textContent = datos.codigoQR ?? '—';
     
   modalTicket.style.display = 'flex';
